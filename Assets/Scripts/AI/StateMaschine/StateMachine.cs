@@ -4,35 +4,29 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Linq;
 
-public class StateMachine : MonoBehaviour, ISwichState
-{
-    [SerializeField] private Transform _target;
+public abstract class StateMachine : MonoBehaviour
+{ 
+    [SerializeField] protected NavMeshAgent _agent;
 
-    private NavMeshAgent _agent;
-    private List<BaseState> _states;
-    private BaseState _currentState;
+    protected List<BaseState> _states;
+    protected BaseState _currentState;
 
     private void Start()
-    {
-        _agent = GetComponent<NavMeshAgent>();
-
-        _states = new List<BaseState>()
-        {
-            new MoveToTargetState(_target, _agent, this)
-        };
-
+    {     
         _currentState = _states[0];
+        _currentState.EnterState(this);
     }
 
     private void Update()
     {
-        _currentState.StartState();
+        _currentState.UpdateState(this);
     }
 
     public void SwichState<T>() where T : BaseState
     {
-        _currentState.StopState();
-        var state = _states.FirstOrDefault(x => x is T);
+        _currentState.ExitState(this);
+        BaseState state = _states.FirstOrDefault(x => x is T);
         _currentState = state;
+        _currentState.EnterState(this);
     }
 }
