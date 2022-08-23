@@ -5,24 +5,20 @@ using UnityEngine.AI;
 
 public class MoveToExitState : MoveToTargetBaseState
 {
-    public MoveToExitState(Transform target, NavMeshAgent agent) : base(target, agent) { }
+    public MoveToExitState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
 
-    public override void EnterState(StateMachine stateMachine)
+    public override void EnterState()
     {
+        _agent.destination = _target.position;
     }
 
-    public override void ExitState(StateMachine stateMachine)
+    public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        if (CheckDistance())
+            Debug.Log("exit");
     }
 
-    public override void UpdateState(StateMachine stateMachine)
+    public override void ExitState()
     {
-        throw new System.NotImplementedException();
-    }
-
-    protected override bool CheckDistance()
-    {
-        throw new System.NotImplementedException();
-    }
+    } 
 }

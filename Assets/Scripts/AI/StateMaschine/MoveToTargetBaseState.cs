@@ -6,13 +6,14 @@ using UnityEngine.AI;
 public abstract class MoveToTargetBaseState : BaseState
 {
     protected Transform _target;
-    protected NavMeshAgent _agent;
 
-    public MoveToTargetBaseState(Transform target, NavMeshAgent agent)
+    public MoveToTargetBaseState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(stateMachine, agent)
     {
         _target = target;
-        _agent = agent;
     }
 
-    protected abstract bool CheckDistance();
+    protected virtual bool CheckDistance()
+    {
+        return _agent.remainingDistance < 1f;
+    }   
 }

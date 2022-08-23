@@ -5,24 +5,24 @@ using UnityEngine.AI;
 
 public class MoveToCashBoxState : MoveToTargetBaseState
 {
-    public MoveToCashBoxState(Transform target, NavMeshAgent agent) : base(target, agent) { }
+    public MoveToCashBoxState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
 
-    public override void EnterState(StateMachine stateMachine)
+    public override void EnterState()
     {
+        _agent.destination = _target.position;
     }
 
-    public override void ExitState(StateMachine stateMachine)
+    public override void UpdateState()
     {
-        throw new System.NotImplementedException();
+        if (CheckDistance())
+        {
+            _stateMachine.StartCoroutine(DelayBetweenStates(1));
+            _stateMachine.ActivateNextState(this);
+        }
     }
 
-    public override void UpdateState(StateMachine stateMachine)
+    public override void ExitState()
     {
-        throw new System.NotImplementedException();
-    }
-
-    protected override bool CheckDistance()
-    {
-        throw new System.NotImplementedException();
-    }
+        _stateMachine.StopCoroutine(DelayBetweenStates(1));
+    }  
 }

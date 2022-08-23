@@ -5,26 +5,23 @@ using UnityEngine.AI;
 
 public class MoveToShelfState : MoveToTargetBaseState
 {
-    public MoveToShelfState(Transform target, NavMeshAgent agent) : base(target, agent) { }
+    public MoveToShelfState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
 
-    public override void EnterState(StateMachine stateMachine)
+    public override void EnterState()
     {
         _agent.destination = _target.position;
     }
-    public override void UpdateState(StateMachine stateMachine)
+    public override void UpdateState()
     {
         if (CheckDistance())
-            stateMachine.SwichState<GrabItemsState>();
+        {
+            _stateMachine.StartCoroutine(DelayBetweenStates(1));
+            _stateMachine.ActivateNextState(this);
+        }
     }
 
-    public override void ExitState(StateMachine stateMachine)
+    public override void ExitState()
     {
-        Debug.Log("Exit");
-    }
-
-
-    protected override bool CheckDistance()
-    {
-        return _agent.remainingDistance < 1f;
+        _stateMachine.StopCoroutine(DelayBetweenStates(1));
     }
 }

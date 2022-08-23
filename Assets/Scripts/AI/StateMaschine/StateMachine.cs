@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using System.Linq;
+using System;
 
 public abstract class StateMachine : MonoBehaviour
 { 
@@ -11,22 +11,36 @@ public abstract class StateMachine : MonoBehaviour
     protected List<BaseState> _states;
     protected BaseState _currentState;
 
+    private int _index;
+
     private void Start()
-    {     
-        _currentState = _states[0];
-        _currentState.EnterState(this);
+    {   
+        _index = 0;
+        _currentState = _states[_index];
+        _currentState.EnterState();
     }
 
     private void Update()
     {
-        _currentState.UpdateState(this);
+        _currentState.UpdateState();
     }
 
-    public void SwichState<T>() where T : BaseState
+    public void ActivateNextState(object sender)
     {
-        _currentState.ExitState(this);
-        BaseState state = _states.FirstOrDefault(x => x is T);
-        _currentState = state;
-        _currentState.EnterState(this);
+        if (sender is BaseState)
+        {
+            if (_index < _states.Count)
+                _index++;
+            else
+                _index = 0;
+
+            _currentState.ExitState();            
+            _currentState = _states[_index];
+            _currentState.EnterState();
+        }
+        else
+        {
+            throw new Exception();
+        }    
     }
 }
