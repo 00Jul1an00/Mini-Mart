@@ -15,9 +15,7 @@ public abstract class StateMachine : MonoBehaviour
 
     private void Start()
     {   
-        _index = 0;
-        _currentState = _states[_index];
-        _currentState.EnterState();
+        _index = 0; 
     }
 
     private void Update()

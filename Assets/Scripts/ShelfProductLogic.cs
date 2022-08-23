@@ -6,15 +6,18 @@ public class ShelfProductLogic : MonoBehaviour
 {
     [SerializeField] private Product _productType;
     [SerializeField] private int _capacity;
+    [SerializeField] private Transform _navMeshWayPoint;
 
     private List<Product> _productsOnShelf;
 
+    public Transform NavMeshWayPoint => _navMeshWayPoint;
+    public int ItemsQuantity { get { return _productsOnShelf.Count; } }
     public Product ProductType => _productType;
-    //public IReadOnlyList<Product> ProductsOnShelf { get; private set; }
 
     private void Start()
     {
         _productsOnShelf = new List<Product>(_capacity);
+        AddProduct();
     }
 
     public void AddProduct()

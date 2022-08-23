@@ -14,6 +14,6 @@ public abstract class MoveToTargetBaseState : BaseState
 
     protected virtual bool CheckDistance()
     {
-        return _agent.remainingDistance < 1f;
+        return _agent.remainingDistance < .1f;
     }   
 }

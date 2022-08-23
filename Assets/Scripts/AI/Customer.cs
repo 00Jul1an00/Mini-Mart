@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class Customer : MonoBehaviour
 {
-    [SerializeField] public Product _debugProduct;
     [SerializeField] private int _wishListMaxCapacity;
 
     private int _wishListCapacity;
     private List<Product> _inventoryList = new List<Product>();
     private List<Product> _wishList = new List<Product>();
 
+    public IReadOnlyList<Product> WishList;
+
     private void Start()
     {
         _wishListCapacity = Random.Range(1, _wishListMaxCapacity);
         RandomWishList();
+        WishList = _wishList;
     }
 
     public void GrabProduct()
@@ -22,11 +24,11 @@ public class Customer : MonoBehaviour
         Product product = _wishList[0];
         _inventoryList.Add(product);
         _wishList.Remove(product);
-        //print(_inventoryList[0]);
-        //print(_wishList.Count);
+
+        print(product);
     }
 
-    //%
+    //!!!
     public bool TryGrabProduct()
     {
         return true;
@@ -34,7 +36,7 @@ public class Customer : MonoBehaviour
 
     private void RandomWishList()
     {
-        for(int i = 0; i < _wishListCapacity; i++)
+        for (int i = 0; i < _wishListCapacity; i++)
         {
             while(true)
             {

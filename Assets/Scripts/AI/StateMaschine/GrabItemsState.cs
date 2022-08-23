@@ -5,12 +5,11 @@ using UnityEngine.AI;
 
 public class GrabItemsState : BaseState
 {
-    private Product _itemToGrab;
-    private Shelf _shelf;
+    private ShelfProductLogic _shelf;
 
-    public GrabItemsState(Product itemToGrab, StateMachine stateMachine, NavMeshAgent agent) : base(stateMachine, agent)
+    public GrabItemsState(NavMeshAgent agent, ShelfProductLogic shelf, StateMachine stateMachine) : base(stateMachine, agent)
     {
-        _itemToGrab = itemToGrab;
+        _shelf = shelf;
     }
 
     public override void EnterState()
@@ -22,9 +21,12 @@ public class GrabItemsState : BaseState
     {
         if (_stateMachine is CustomerStateMachine)
         {
-            CustomerStateMachine customerStateMachine = (CustomerStateMachine)_stateMachine;
-            customerStateMachine.Customer.GrabProduct();
-            _stateMachine.ActivateNextState(this);
+            if(_shelf.ItemsQuantity > 0)
+            {
+                CustomerStateMachine customerStateMachine = (CustomerStateMachine)_stateMachine;
+                customerStateMachine.Customer.GrabProduct();
+                _stateMachine.ActivateNextState(this);
+            }           
         }
     }
 
