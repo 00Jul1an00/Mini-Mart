@@ -5,10 +5,10 @@ using UnityEngine.AI;
 
 public class GrabItemsState : BaseState
 {
-    private ProductSO _itemToGrab;
+    private Product _itemToGrab;
     private Shelf _shelf;
 
-    public GrabItemsState(ProductSO itemToGrab, StateMachine stateMachine, NavMeshAgent agent) : base(stateMachine, agent)
+    public GrabItemsState(Product itemToGrab, StateMachine stateMachine, NavMeshAgent agent) : base(stateMachine, agent)
     {
         _itemToGrab = itemToGrab;
     }

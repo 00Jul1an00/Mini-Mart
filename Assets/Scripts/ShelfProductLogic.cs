@@ -4,17 +4,17 @@ using UnityEngine;
 
 public class ShelfProductLogic : MonoBehaviour
 {
-    [SerializeField] private ProductSO _productType;
+    [SerializeField] private Product _productType;
     [SerializeField] private int _capacity;
 
-    private List<ProductSO> _productsOnShelf;
+    private List<Product> _productsOnShelf;
 
-    public ProductSO ProductType => _productType;
+    public Product ProductType => _productType;
     //public IReadOnlyList<Product> ProductsOnShelf { get; private set; }
 
     private void Start()
     {
-        _productsOnShelf = new List<ProductSO>(_capacity);
+        _productsOnShelf = new List<Product>(_capacity);
     }
 
     public void AddProduct()

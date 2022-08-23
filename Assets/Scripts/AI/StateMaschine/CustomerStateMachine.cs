@@ -9,7 +9,7 @@ public class CustomerStateMachine : StateMachine
     [SerializeField] private Transform _exitPos;
     public Customer Customer { get; private set; }
 
-    private ProductSO _itemToGrab;
+    private Product _itemToGrab;
 
     private void Awake()
     {

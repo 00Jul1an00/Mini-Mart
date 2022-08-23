@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d8a002f9971a9849ae286351e035e34, type: 3}
   m_Name: Cacao Beans
   m_EditorClassIdentifier: 
-  _name: 
-  _isAvailable: 0
+  _name: CacaoBeans
   _cost: 0
-  _needFor: {fileID: 0}
+  _needFor:
+  - {fileID: 0}
   _makesFrom: {fileID: 0}
+  IsAvailable: 0
