@@ -38,8 +38,8 @@ public class Customer : MonoBehaviour
         {
             while(true)
             {
-                int randomNum = Random.Range(0, GameManager.Instance.AvailableProducts.Count);
-                Product product = GameManager.Instance.AvailableProducts[randomNum];
+                int randomNum = Random.Range(0, GameManager.Instance.Products.Count);
+                Product product = GameManager.Instance.Products[randomNum];
 
                 if (product.IsAvailable)
                 {

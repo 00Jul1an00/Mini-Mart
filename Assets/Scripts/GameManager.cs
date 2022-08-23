@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public IReadOnlyList<Product> AvailableProducts;
+    public IReadOnlyList<Product> Products;
     public static GameManager Instance { get; private set; } 
 
     private void Awake()
@@ -12,7 +12,7 @@ public class GameManager : MonoBehaviour
         if(Instance == null)
             Instance = this;
 
-        AvailableProducts = new List<Product>()
+        Products = new List<Product>()
         {
             new Wheat() { IsAvailable = true },
             new Tomato() { IsAvailable = true },

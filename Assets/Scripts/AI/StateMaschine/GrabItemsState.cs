@@ -23,11 +23,8 @@ public class GrabItemsState : BaseState
         if (_stateMachine is CustomerStateMachine)
         {
             CustomerStateMachine customerStateMachine = (CustomerStateMachine)_stateMachine;
-            if (customerStateMachine.Customer._debugProduct = _itemToGrab)
-            {
-                customerStateMachine.Customer.GrabProduct();
-                _stateMachine.ActivateNextState(this);
-            }
+            customerStateMachine.Customer.GrabProduct();
+            _stateMachine.ActivateNextState(this);
         }
     }
 
