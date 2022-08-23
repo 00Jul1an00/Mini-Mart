@@ -16,7 +16,7 @@ public class Shelf : MonoBehaviour
     }
     private void Update()
     {
-        OnTriggerEnter(_spendZone.)
+        //OnTriggerEnter(_spendZone.)
     }
     private void OnTriggerEnter(Collider collider)
     {

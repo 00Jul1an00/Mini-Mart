@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Shelf : MonoBehaviour
+public class ShelfProductLogic : MonoBehaviour
 {
     [SerializeField] private ProductSO _productType;
     [SerializeField] private int _capacity;
