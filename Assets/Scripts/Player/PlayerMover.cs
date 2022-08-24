@@ -9,11 +9,12 @@ public class PlayerMover : MonoBehaviour
     private CharacterController _chController;
     private Vector3 _directionVector;
     private float _playerSpeed = 5f;
+    private Transform _playerTransform;
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
         _chController = GetComponent<CharacterController>(); 
-      
+        _playerTransform = GetComponent<Transform>(); 
         
     }
     
@@ -27,7 +28,10 @@ public class PlayerMover : MonoBehaviour
         _directionVector.x = Input.GetAxis("Horizontal") * _playerSpeed;
         _directionVector.z = Input.GetAxis("Vertical") * _playerSpeed;
         _chController.Move(_directionVector * Time.deltaTime);
-        
+        if (_playerTransform.transform.hasChanged == true)
+            _particleSystem.Play();
+            
+
             
 
         if (Vector3.Angle(Vector3.forward, _directionVector) >1 || Vector3.Angle(Vector3.forward, _directionVector) == 0)
