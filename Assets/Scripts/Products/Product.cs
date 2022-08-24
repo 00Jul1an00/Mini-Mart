@@ -8,5 +8,5 @@ public abstract class Product : MonoBehaviour
 
     public bool IsAvailable;
 
-    protected virtual void Produce() { }
+    protected virtual void Produce(float delay) { }
 }

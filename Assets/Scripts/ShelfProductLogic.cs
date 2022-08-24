@@ -11,8 +11,6 @@ public class ShelfProductLogic : ShelfProductsObjectPool
 
     private void Start()
     {
-        foreach(var p in _productsOnShelf)
-            AddProduct();
     }
 
     public void AddProduct()
@@ -21,11 +19,11 @@ public class ShelfProductLogic : ShelfProductsObjectPool
             SetActiveStatusForProduct(true);
     }
 
-    public void RemoveProduct()
+    public bool TryRemoveProduct()
     {
         if (Index > 0)
             SetActiveStatusForProduct(false);
-        else
-            print("false");
+
+        return Index > 0;
     }
 }

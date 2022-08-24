@@ -32,10 +32,11 @@ public class ShelfProductsObjectPool : MonoBehaviour
     protected void SetActiveStatusForProduct(bool status)
     {
         if (status)
-            Index++;
-        else
-            Index--;
+            Index++;       
 
             _productsOnShelf[Index].gameObject.SetActive(status);
+
+        if (!status)
+            Index--;
     }
 }
