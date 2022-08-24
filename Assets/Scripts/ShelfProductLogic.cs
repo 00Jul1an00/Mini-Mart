@@ -9,23 +9,19 @@ public class ShelfProductLogic : ShelfProductsObjectPool
     public Transform NavMeshWayPoint => _navMeshWayPoint;
     public Product ProductType => _productType;
 
-    private void Start()
-    {
-        foreach(var p in _productsOnShelf)
-            AddProduct();
-    }
-
-    public void AddProduct()
+    public bool AddProduct()
     {
         if(Index < _productsOnShelf.Count)
             SetActiveStatusForProduct(true);
+
+        return Index < _productsOnShelf.Count;
     }
 
-    public void RemoveProduct()
+    public bool TryRemoveProduct()
     {
         if (Index > 0)
             SetActiveStatusForProduct(false);
-        else
-            print("false");
+
+        return Index > 0;
     }
 }

@@ -4,17 +4,20 @@ using UnityEngine;
 
 public class CustomerStateMachine : StateMachine
 {
-    [SerializeField] private Transform _cashBoxPos;
-    [SerializeField] private Transform _exitPos;
-    
+    private Transform _cashBoxPos;
+    private Transform _exitPos;
+
     private ShelfProductLogic[] _shelfs;
 
     public Customer Customer { get; private set; }
 
     private void Start()
     {
+        _cashBoxPos = FindObjectOfType<CashBox>().transform;
+        _exitPos = FindObjectOfType<Exit>().transform;
         _shelfs = FindObjectsOfType<ShelfProductLogic>();
         Customer = GetComponent<Customer>();
+
         FillStatesList();
         _states.Add(new MoveToCashBoxState(_cashBoxPos, _agent, this));
         _states.Add(new MoveToExitState(_exitPos, _agent, this));

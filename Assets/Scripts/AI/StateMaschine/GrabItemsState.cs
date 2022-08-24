@@ -22,13 +22,16 @@ public class GrabItemsState : BaseState
         if (_stateMachine is CustomerStateMachine)
         {
             CustomerStateMachine customerStateMachine = (CustomerStateMachine)_stateMachine;
-            customerStateMachine.Customer.GrabProduct();
-            _shelf.RemoveProduct();
-            _stateMachine.ActivateNextState(this);
+            
+            if(_shelf.TryRemoveProduct())
+            {
+                customerStateMachine.Customer.GrabProduct();
+                _stateMachine.ActivateNextState(this);
+            }
         }
     }
 
     public override void ExitState()
     {
-    }  
+    }
 }

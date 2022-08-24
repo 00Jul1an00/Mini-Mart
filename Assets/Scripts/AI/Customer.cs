@@ -12,11 +12,19 @@ public class Customer : MonoBehaviour
 
     public IReadOnlyList<Product> WishList;
 
-    private void Start()
+    public void Init(object CallFrom)
     {
-        _wishListCapacity = Random.Range(1, _wishListMaxCapacity + 1);
-        RandomWishList();
-        WishList = _wishList;
+        if(CallFrom is CustomerSpawner)
+        {
+            _wishListCapacity = Random.Range(1, _wishListMaxCapacity + 1);
+            RandomWishList();
+            WishList = _wishList;
+        }
+        else
+        {
+            throw new System.Exception("Called not from spawner");
+        }
+        
     }
 
     public void GrabProduct()
@@ -26,12 +34,6 @@ public class Customer : MonoBehaviour
         _wishList.Remove(product);
 
         print(product);
-    }
-
-    //!!!
-    public bool TryGrabProduct()
-    {
-        return true;
     }
 
     private void RandomWishList()
