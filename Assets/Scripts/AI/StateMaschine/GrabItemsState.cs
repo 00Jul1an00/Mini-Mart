@@ -21,12 +21,10 @@ public class GrabItemsState : BaseState
     {
         if (_stateMachine is CustomerStateMachine)
         {
-            if(_shelf.ItemsQuantity > 0)
-            {
-                CustomerStateMachine customerStateMachine = (CustomerStateMachine)_stateMachine;
-                customerStateMachine.Customer.GrabProduct();
-                _stateMachine.ActivateNextState(this);
-            }           
+            CustomerStateMachine customerStateMachine = (CustomerStateMachine)_stateMachine;
+            customerStateMachine.Customer.GrabProduct();
+            _shelf.RemoveProduct();
+            _stateMachine.ActivateNextState(this);
         }
     }
 

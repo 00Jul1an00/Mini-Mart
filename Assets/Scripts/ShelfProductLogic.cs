@@ -2,33 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShelfProductLogic : MonoBehaviour
+public class ShelfProductLogic : ShelfProductsObjectPool
 {
-    [SerializeField] private Product _productType;
-    [SerializeField] private int _capacity;
     [SerializeField] private Transform _navMeshWayPoint;
 
-    private List<Product> _productsOnShelf;
-
     public Transform NavMeshWayPoint => _navMeshWayPoint;
-    public int ItemsQuantity { get { return _productsOnShelf.Count; } }
     public Product ProductType => _productType;
 
     private void Start()
     {
-        _productsOnShelf = new List<Product>(_capacity);
-        AddProduct();
+        foreach(var p in _productsOnShelf)
+            AddProduct();
     }
 
     public void AddProduct()
     {
-        if (_productsOnShelf.Count < _capacity)
-            _productsOnShelf.Add(_productType);
+        if(Index < _productsOnShelf.Count)
+            SetActiveStatusForProduct(true);
     }
 
     public void RemoveProduct()
     {
-        if (_productsOnShelf.Count > 0)
-            _productsOnShelf.Remove(_productType);
+        if (Index > 0)
+            SetActiveStatusForProduct(false);
+        else
+            print("false");
     }
 }

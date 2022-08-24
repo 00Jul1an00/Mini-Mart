@@ -14,7 +14,7 @@ public class Customer : MonoBehaviour
 
     private void Start()
     {
-        _wishListCapacity = Random.Range(1, _wishListMaxCapacity);
+        _wishListCapacity = Random.Range(1, _wishListMaxCapacity + 1);
         RandomWishList();
         WishList = _wishList;
     }
