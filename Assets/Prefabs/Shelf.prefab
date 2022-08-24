@@ -144,7 +144,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52b4d4b6e04c01b40a1f29e6ed8cec77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _productType: {fileID: 0}
+  _productType: {fileID: 8808740649812844418, guid: 7d4ffceb305b49e44ad107348ab0dee4, type: 3}
   _spawnPoints:
   - {fileID: 7321413266544594185}
   - {fileID: 7414518114861771899}
