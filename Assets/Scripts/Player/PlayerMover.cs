@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class PlayerMover : MonoBehaviour
 {
+    [SerializeField] private ParticleSystem _particleSystem;
     private Rigidbody _rigidBody;
     private CharacterController _chController;
     private Vector3 _directionVector;
-    private float _playerSpeed = 5f;   
+    private float _playerSpeed = 5f;
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
         _chController = GetComponent<CharacterController>(); 
-       
+      
+        
     }
     
     void Update()
@@ -25,6 +27,8 @@ public class PlayerMover : MonoBehaviour
         _directionVector.x = Input.GetAxis("Horizontal") * _playerSpeed;
         _directionVector.z = Input.GetAxis("Vertical") * _playerSpeed;
         _chController.Move(_directionVector * Time.deltaTime);
+        
+            
 
         if (Vector3.Angle(Vector3.forward, _directionVector) >1 || Vector3.Angle(Vector3.forward, _directionVector) == 0)
         {

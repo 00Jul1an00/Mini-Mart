@@ -5,14 +5,18 @@ using UnityEngine;
 public class Money : MonoBehaviour
 {
     public static int PlayerMoney { get; private set; } = 100;
-    void Start()
+    
+    public void AddMoney()
     {
-        
+
     }
 
-   
-    void Update()
+    public static void SpendMoney(int minusSum)
     {
-        
+        if (PlayerMoney > 0)
+        {
+            PlayerMoney -= minusSum;
+        }
     }
+    
 }

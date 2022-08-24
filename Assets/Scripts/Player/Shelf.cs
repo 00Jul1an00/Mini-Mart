@@ -7,7 +7,7 @@ public class Shelf : MonoBehaviour
 {
     [SerializeField] private GameObject _spendZone;
     [SerializeField] private int ShelfCost;
-    [SerializeField] private Collider _zoneCollider;
+    private bool _isShelfBought;
 
     private event UnityAction<int> MoneyChanged;
 
@@ -23,11 +23,12 @@ public class Shelf : MonoBehaviour
     {
         if (collider.TryGetComponent(out PlayerMover player) && Money.PlayerMoney >= ShelfCost)
         {
-            
+            Money.SpendMoney(ShelfCost);
+            print(Money.PlayerMoney);
         }
         else
         {
-           
+            print("У вас не хватает денег!");
         }
 
 
