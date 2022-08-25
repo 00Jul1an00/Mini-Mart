@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -10,7 +9,7 @@ public class Customer : MonoBehaviour
     private List<Product> _inventoryList = new List<Product>();
     private List<Product> _wishList = new List<Product>();
 
-    public IReadOnlyList<Product> WishList;
+    public IReadOnlyList<Product> WishList { get; private set; }
 
     public void Init(object CallFrom)
     {
@@ -29,11 +28,26 @@ public class Customer : MonoBehaviour
 
     public void GrabProduct()
     {
-        Product product = _wishList[0];
-        _inventoryList.Add(product);
-        _wishList.Remove(product);
+        if(_wishList.Count > 0)
+        {
+            Product product = _wishList[0];
+            _inventoryList.Add(product);
+            _wishList.Remove(product);
+        }
+        else
+        {
+            throw new System.Exception("WishList is Empty");
+        }
+    }
 
-        print(product);
+    public int PayForProducts()
+    {
+        int sum = 0;
+
+        foreach (var product in _inventoryList)
+            sum += product.Cost;
+
+        return sum;
     }
 
     private void RandomWishList()

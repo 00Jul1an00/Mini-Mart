@@ -9,7 +9,15 @@ public class ShelfProductLogic : ShelfProductsObjectPool
     public Transform NavMeshWayPoint => _navMeshWayPoint;
     public Product ProductType => _productType;
 
-    public bool AddProduct()
+    private void Awake()
+    {
+        TryAddProduct();
+        TryAddProduct();
+        TryAddProduct();
+        TryAddProduct();
+    }
+
+    public bool TryAddProduct()
     {
         if(Index < _productsOnShelf.Count)
             SetActiveStatusForProduct(true);

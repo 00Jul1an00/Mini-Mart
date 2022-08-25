@@ -14,20 +14,33 @@ public class GrabItemsState : BaseState
 
     public override void EnterState()
     {
-        Debug.Log("from GrabState");
     }
 
     public override void UpdateState()
     {
-        if (_stateMachine is CustomerStateMachine)
-        {
-            CustomerStateMachine customerStateMachine = (CustomerStateMachine)_stateMachine;
-            
+        if (_stateMachine is CustomerStateMachine customerStateMachine)
+        {   
             if(_shelf.TryRemoveProduct())
             {
                 customerStateMachine.Customer.GrabProduct();
                 _stateMachine.ActivateNextState(this);
             }
+        }
+        else if (_stateMachine is PortersStateMachine portersStateMachine)
+        {
+            bool isGrabed = false;
+
+            for (int i = 0; i < portersStateMachine.Porter.InventoryCapacity; i++)
+            {
+                if (_shelf.TryRemoveProduct())
+                {
+                    portersStateMachine.Porter.PutProduct();
+                    isGrabed = true;
+                }
+            }
+
+            if(isGrabed)
+                _stateMachine.ActivateNextState(this);
         }
     }
 

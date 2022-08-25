@@ -8,14 +8,13 @@ public abstract class StateMachine : MonoBehaviour
 { 
     [SerializeField] protected NavMeshAgent _agent;
 
-    protected List<BaseState> _states;
+    protected List<BaseState> _states = new();
     protected BaseState _currentState;
 
-    private int _index;
+    private int _index = 0;
 
     private void Start()
-    {   
-        _index = 0; 
+    {
     }
 
     private void Update()
@@ -27,7 +26,7 @@ public abstract class StateMachine : MonoBehaviour
     {
         if (sender is BaseState)
         {
-            if (_index < _states.Count)
+            if (_index < _states.Count - 1)
                 _index++;
             else
                 _index = 0;

@@ -10,7 +10,7 @@ public class ShelfProductsObjectPool : MonoBehaviour
 
     protected List<Product> _productsOnShelf = new();
 
-    protected int Index { get; private set; } = -1;
+    protected int Index { get; private set; } = 0;
 
     private void Awake()
     {
