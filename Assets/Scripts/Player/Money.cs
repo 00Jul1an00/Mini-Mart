@@ -6,9 +6,12 @@ public class Money : MonoBehaviour
 {
     public static int PlayerMoney { get; private set; } = 100;
     
-    public void AddMoney()
+    public static void AddMoney(int plusSum)
     {
-
+        if (plusSum > 0)
+        {
+            PlayerMoney += plusSum;
+        }    
     }
 
     public static void SpendMoney(int minusSum)

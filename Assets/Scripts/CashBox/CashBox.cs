@@ -6,9 +6,9 @@ public class CashBox : MonoBehaviour
 {
     [SerializeField] private GameObject _playerZone;
     public Transform CashTransform;
-    private Vector3 _moneyTakeDistance = new Vector3(2,0,2);
+    private float _moneyTakeDistance = 2f;
     private bool _isCashierBought;
-    public int Money { get; private set; }
+    public int CashBoxMoney { get; private set; } = 10;
     private bool _isCustomerServed;
 
     private void Start()
@@ -21,7 +21,7 @@ public class CashBox : MonoBehaviour
     }
     private void Update()
     {
-        print(_isCustomerServed);
+        TakeMoney();
     }
     private bool OnTriggerEnter(Collider other)
     {
@@ -40,17 +40,19 @@ public class CashBox : MonoBehaviour
     {
         if (objectChanger is MoveToCashBoxState && money > 0)
         {
-            Money += money;
+            CashBoxMoney += money;
         }
     }
 
     private void TakeMoney()
     {
-        //if(Vector3.Distance(PlayerMover.PlayerTransform.position, CashTransform.position) < _moneyTakeDistance)
-        //{
-
-        //}
-
+        float distance = (PlayerMover.PlayerTransform.position - CashTransform.position).magnitude;
+        if (distance < _moneyTakeDistance)
+        {
+            Money.AddMoney(CashBoxMoney);
+            CashBoxMoney = 0;
+            
+        }    
         
     }
 
