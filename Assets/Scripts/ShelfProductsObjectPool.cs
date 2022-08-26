@@ -12,12 +12,7 @@ public class ShelfProductsObjectPool : MonoBehaviour
 
     protected int Index { get; private set; } = 0;
 
-    private void Awake()
-    {
-        Init();
-    }
-
-    private void Init()
+    protected void Init()
     {
         int capacity = _spawnPoints.Length;
 

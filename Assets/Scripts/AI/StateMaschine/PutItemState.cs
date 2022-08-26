@@ -16,7 +16,7 @@ public class PutItemState : BaseState
 
     public override void EnterState()
     {
-        Debug.Log("From PutItem State");
+        Debug.Log("From Put Item State");
     }
 
     public override void UpdateState()

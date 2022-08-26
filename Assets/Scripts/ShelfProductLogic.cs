@@ -11,6 +11,7 @@ public class ShelfProductLogic : ShelfProductsObjectPool
 
     private void Awake()
     {
+        Init();
         TryAddProduct();
         TryAddProduct();
         TryAddProduct();

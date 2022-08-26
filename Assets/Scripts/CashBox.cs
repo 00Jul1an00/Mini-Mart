@@ -46,10 +46,10 @@ public class CashBox : MonoBehaviour
 
     private void TakeMoney()
     {
-        if(Vector3.Distance(PlayerMover.PlayerTransform.position, CashTransform.position) < _moneyTakeDistance)
-        {
+        //if(Vector3.Distance(PlayerMover.PlayerTransform.position, CashTransform.position) < _moneyTakeDistance)
+        //{
 
-        }
+        //}
 
         
     }
