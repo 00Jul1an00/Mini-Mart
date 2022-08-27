@@ -153,8 +153,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 3489108180956658354}
-  _cashBoxPos: {fileID: 0}
-  _exitPos: {fileID: 0}
 --- !u!114 &3489108180956658360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,4 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a79365afaaebf134eba7fce9fcc53065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _wishListMaxCapacity: 3
+  _wishListMaxCapacity: 1

@@ -1,25 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public class PortersStateMachine : StateMachine
 {
-    [SerializeField] private ShelfProductLogic _firstShelf;
-    [SerializeField] private ShelfProductLogic _secondShelf;
-
     public Porter Porter { get; private set; }
 
-    private void Awake()
+    private void Start()
     {
         Porter = GetComponent<Porter>();
         _agent.speed = Porter.Speed;
 
-        _states.Add(new MoveToShelfState(_firstShelf.transform, _agent, this));
-        _states.Add(new GrabItemsState(_agent, _firstShelf, this));
-        _states.Add(new MoveToShelfState(_secondShelf.transform, _agent, this));
-        _states.Add(new PutItemState(_agent, _secondShelf, this));
+        SetStates();
 
         _currentState = _states[0];
         _currentState.EnterState();
+    }
+
+    private void SetStates()
+    {
+        var productionBuilding = GameManager.Instance.ProductionBuildings[Porter.ProductType];
+        var shelf = GameManager.Instance.Shelfs[Porter.ProductType];
+
+        _states.Add(new MoveToShelfState(productionBuilding.transform, _agent, this));
+        _states.Add(new GrabItemsState(_agent, productionBuilding, this));
+        _states.Add(new MoveToShelfState(shelf.NavMeshWayPoint, _agent, this));
+        _states.Add(new PutItemState(_agent, shelf, this));
     }
 }

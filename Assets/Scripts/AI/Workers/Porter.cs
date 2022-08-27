@@ -7,19 +7,23 @@ public class Porter : Worker
     [SerializeField] private Product _productType;
     [SerializeField] private int _inventoryCapacity;
 
+    public bool CanTakeProduct { get { return _inventoryStack.Count < _inventoryCapacity; } private set { } }
+    public bool CanPutProduct { get { return _inventoryStack.Count > 0; } private set { } }
+
+    public Product ProductType => _productType;
     public int InventoryCapacity => _inventoryCapacity;
 
     private Stack<Product> _inventoryStack = new();
 
-    public void TakeProuduct()
+    public void TryTakeProduct()
     {
-        if (_inventoryStack.Count <= _inventoryCapacity)
+        if (CanTakeProduct)
             _inventoryStack.Push(_productType);
     }
 
-    public void PutProduct()
+    public void TryPutProduct()
     {
-        if (_inventoryStack.Count > 0)
+        if (CanPutProduct)
             _inventoryStack.Pop();
     }
 }

@@ -2,35 +2,29 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShelfProductLogic : ShelfProductsObjectPool
+public class ShelfProductLogic : ProductsObjectPool
 {
     [SerializeField] private Transform _navMeshWayPoint;
 
     public Transform NavMeshWayPoint => _navMeshWayPoint;
-    public Product ProductType => _productType;
+    public bool CanAddProduct { get { return Index < _productsInObjectPool.Count; } private set { } }
+    public bool CanRemoveProduct { get { return Index > 0; } private set { } }
 
-    private void Awake()
+
+    private void Start()
     {
         Init();
-        TryAddProduct();
-        TryAddProduct();
-        TryAddProduct();
-        TryAddProduct();
     }
 
-    public bool TryAddProduct()
+    public void TryAddProduct()
     {
-        if(Index < _productsOnShelf.Count)
+        if (CanAddProduct)
             SetActiveStatusForProduct(true);
-
-        return Index < _productsOnShelf.Count;
     }
 
-    public bool TryRemoveProduct()
+    public void TryRemoveProduct()
     {
-        if (Index > 0)
+        if (CanRemoveProduct)
             SetActiveStatusForProduct(false);
-
-        return Index > 0;
     }
 }

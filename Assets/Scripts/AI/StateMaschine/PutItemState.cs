@@ -16,16 +16,16 @@ public class PutItemState : BaseState
 
     public override void EnterState()
     {
-        Debug.Log("From Put Item State");
     }
 
     public override void UpdateState()
     {
         for(int i = 0; i < _porter.InventoryCapacity; i++)
         {
-            if (_shelf.TryAddProduct())
+            if (_shelf.CanAddProduct && _porter.CanPutProduct)
             {
-                _porter.PutProduct();
+                _porter.TryPutProduct();
+                _shelf.TryAddProduct();
             }
         }
 

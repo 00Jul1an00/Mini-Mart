@@ -11,11 +11,11 @@ public class Customer : MonoBehaviour
 
     public IReadOnlyList<Product> WishList { get; private set; }
 
-    public void Init(object CallFrom)
+    public void Init(object sender)
     {
-        if(CallFrom is CustomerSpawner)
+        if(sender is CustomerSpawner)
         {
-            _wishListCapacity = Random.Range(1, _wishListMaxCapacity + 1);
+            _wishListCapacity = Random.Range(1, _wishListMaxCapacity); //_wishListMaxCapacity + 1
             RandomWishList();
             WishList = _wishList;
         }
