@@ -8,7 +8,7 @@ public class CashBox : MonoBehaviour
     public Transform CashTransform;
     private float _moneyTakeDistance = 2f;
     private bool _isCashierBought;
-    public int CashBoxMoney { get; private set; } = 10;
+    public static int CashBoxMoney { get; private set; } = 50;
     private bool _isCustomerServed;
 
     private void Start()
@@ -22,6 +22,7 @@ public class CashBox : MonoBehaviour
     private void Update()
     {
         TakeMoney();
+        
     }
     private bool OnTriggerEnter(Collider other)
     {
