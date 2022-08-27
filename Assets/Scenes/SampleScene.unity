@@ -284,6 +284,37 @@ Transform:
   m_Father: {fileID: 66126820}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &320686671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 320686672}
+  m_Layer: 0
+  m_Name: CashContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &320686672
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 320686671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.3, y: 2.0373414, z: -38.962875}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &358174291
 GameObject:
   m_ObjectHideFlags: 0
@@ -1166,6 +1197,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1096529618}
   - component: {fileID: 1096529619}
+  - component: {fileID: 1096529620}
   m_Layer: 0
   m_Name: CashBox
   m_TagString: Untagged
@@ -1204,6 +1236,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerZone: {fileID: 0}
   CashTransform: {fileID: 0}
+--- !u!114 &1096529620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1096529617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d0fe1a3900181a49826e123f11ab65a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _prefab: {fileID: 13607243437337974, guid: 64ec78120fae1da4f9346bf4676e1ed4, type: 3}
+  AutoExpand: 0
+  _container: {fileID: 320686672}
 --- !u!1 &1098509274
 GameObject:
   m_ObjectHideFlags: 0
