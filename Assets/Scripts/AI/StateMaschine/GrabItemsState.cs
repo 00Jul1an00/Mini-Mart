@@ -26,7 +26,6 @@ public class GrabItemsState : BaseState
         {   
             if(_shelf.CanRemoveProduct)
             {
-                Debug.Log("here");
                 _shelf.TryRemoveProduct();
                 customerStateMachine.Customer.GrabProduct();
                 _stateMachine.ActivateNextState(this);

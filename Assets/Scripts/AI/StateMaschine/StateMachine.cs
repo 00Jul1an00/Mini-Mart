@@ -13,10 +13,6 @@ public abstract class StateMachine : MonoBehaviour
 
     private int _index = 0;
 
-    private void Start()
-    {
-    }
-
     private void Update()
     {
         _currentState.UpdateState();

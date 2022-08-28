@@ -8,6 +8,9 @@ public abstract class ProductsObjectPool : MonoBehaviour
     [SerializeField] protected Product _productType;
     [SerializeField] private Transform[] _spawnPoints;
 
+    public bool CanAddProduct { get { return Index < _productsInObjectPool.Count; } private set { } }
+    public bool CanRemoveProduct { get { return Index > 0; } private set { } }
+
     protected List<Product> _productsInObjectPool = new();
     protected int Index { get; private set; }
 

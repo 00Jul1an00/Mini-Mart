@@ -10,7 +10,9 @@ public class PlayerMover : MonoBehaviour
     private Vector3 _directionVector;
     private float _playerSpeed = 5f;
     public static Transform PlayerTransform;
-    
+
+    public bool IsNoAnyInput { get; private set; }
+
     void Start()
     {
         _rigidBody = GetComponent<Rigidbody>();
@@ -37,7 +39,8 @@ public class PlayerMover : MonoBehaviour
             Vector3 direct = Vector3.RotateTowards(transform.forward, _directionVector, _playerSpeed, 0f);
             transform.rotation = Quaternion.LookRotation(direct);
         }
-       
+
+        IsNoAnyInput = _directionVector == Vector3.zero;
     }
 
     
