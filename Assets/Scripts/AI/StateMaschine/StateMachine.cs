@@ -5,7 +5,7 @@ using UnityEngine.AI;
 using System;
 
 public abstract class StateMachine : MonoBehaviour
-{ 
+{
     [SerializeField] protected NavMeshAgent _agent;
 
     protected List<BaseState> _states = new();
@@ -18,22 +18,15 @@ public abstract class StateMachine : MonoBehaviour
         _currentState.UpdateState();
     }
 
-    public void ActivateNextState(object sender)
+    public void ActivateNextState()
     {
-        if (sender is BaseState)
-        {
-            if (_index < _states.Count - 1)
-                _index++;
-            else
-                _index = 0;
-
-            _currentState.ExitState();            
-            _currentState = _states[_index];
-            _currentState.EnterState();
-        }
+        if (_index < _states.Count - 1)
+            _index++;
         else
-        {
-            throw new Exception();
-        }    
+            _index = 0;
+
+        _currentState.ExitState();
+        _currentState = _states[_index];
+        _currentState.EnterState();
     }
 }

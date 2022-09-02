@@ -16,7 +16,7 @@ public class MoveToShelfState : MoveToTargetBaseState
         if (CheckDistance())
         {
             _stateMachine.StartCoroutine(DelayBetweenStates(1));
-            _stateMachine.ActivateNextState(this);
+            _stateMachine.ActivateNextState();
         }
     }
 

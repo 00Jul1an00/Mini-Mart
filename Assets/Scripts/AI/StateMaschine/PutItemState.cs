@@ -29,7 +29,7 @@ public class PutItemState : BaseState
             }
         }
 
-        _stateMachine.ActivateNextState(this);
+        _stateMachine.ActivateNextState();
     }
 
     public override void ExitState()

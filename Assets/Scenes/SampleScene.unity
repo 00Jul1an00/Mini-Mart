@@ -1977,6 +1977,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 3790969605016124376, guid: d00f6261e26a2e44c8dc16c2bfa00813, type: 3}
+      propertyPath: _delay
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3790969605016124376, guid: d00f6261e26a2e44c8dc16c2bfa00813, type: 3}
+      propertyPath: _timer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3792604663609934654, guid: d00f6261e26a2e44c8dc16c2bfa00813, type: 3}
       propertyPath: _slotCost
       value: 200
@@ -2042,6 +2050,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7624407944105062987, guid: c0734f3460afb3843ad79f69e1176b98, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7624407944105062987, guid: c0734f3460afb3843ad79f69e1176b98, type: 3}
       propertyPath: m_IsTrigger
       value: 1

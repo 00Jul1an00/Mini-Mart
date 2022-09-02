@@ -59,7 +59,6 @@ public class ProductionBuilding : ProductsObjectPool
 
     private void OnPlayerEnterInTrigger()
     {
-        print("END");
-        //BuySlotForProduction();
+        BuySlotForProduction();
     }
 }

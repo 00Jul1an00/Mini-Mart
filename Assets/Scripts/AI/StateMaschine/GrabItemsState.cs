@@ -28,7 +28,7 @@ public class GrabItemsState : BaseState
             {
                 _shelf.TryRemoveProduct();
                 customerStateMachine.Customer.GrabProduct();
-                _stateMachine.ActivateNextState(this);
+                _stateMachine.ActivateNextState();
             }
         }
         else if (_stateMachine is PortersStateMachine portersStateMachine)
@@ -50,7 +50,7 @@ public class GrabItemsState : BaseState
             }
 
             if(isGrabed)
-                _stateMachine.ActivateNextState(this);
+                _stateMachine.ActivateNextState();
         }
     }
 
