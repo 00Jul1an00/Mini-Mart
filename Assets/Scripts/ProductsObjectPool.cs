@@ -36,7 +36,18 @@ public abstract class ProductsObjectPool : MonoBehaviour
         _productsInObjectPool[Index].gameObject.SetActive(status);
         
         if (status)
-            Index++;
-        
+            Index++; 
+    }
+
+    public void TryAddProduct()
+    {
+        if (CanAddProduct)
+            SetActiveStatusForProduct(true);
+    }
+
+    public void TryRemoveProduct()
+    {
+        if (CanRemoveProduct)
+            SetActiveStatusForProduct(false);
     }
 }

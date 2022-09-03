@@ -5,15 +5,11 @@ using UnityEngine.AI;
 
 public class GrabItemsState : BaseState
 {
-    private readonly ShelfProductLogic _shelf;
-    private readonly ProductionBuilding _productionBuilding;
+    private readonly ProductsObjectPool _productContainer;
 
-    public GrabItemsState(NavMeshAgent agent, ProductsObjectPool productLocation, StateMachine stateMachine) : base(stateMachine, agent)
+    public GrabItemsState(NavMeshAgent agent, ProductsObjectPool productContainer, StateMachine stateMachine) : base(stateMachine, agent)
     {
-        if(productLocation is ShelfProductLogic shelf)
-            _shelf = shelf;
-        else if(productLocation is ProductionBuilding building)
-            _productionBuilding = building;
+        _productContainer = productContainer;
     }
 
     public override void EnterState()
@@ -24,9 +20,9 @@ public class GrabItemsState : BaseState
     {
         if (_stateMachine is CustomerStateMachine customerStateMachine)
         {   
-            if(_shelf.CanRemoveProduct)
+            if(_productContainer.CanRemoveProduct)
             {
-                _shelf.TryRemoveProduct();
+                _productContainer.TryRemoveProduct();
                 customerStateMachine.Customer.GrabProduct();
                 _stateMachine.ActivateNextState();
             }
@@ -37,9 +33,9 @@ public class GrabItemsState : BaseState
 
             for (int i = 0; i < portersStateMachine.Porter.InventoryCapacity; i++)
             {
-                if (_productionBuilding.CanRemoveProduct && portersStateMachine.Porter.CanTakeProduct)
+                if (_productContainer.CanRemoveProduct && portersStateMachine.Porter.CanTakeProduct)
                 {
-                    _productionBuilding.TryRemoveProduct();
+                    _productContainer.TryRemoveProduct();
                     portersStateMachine.Porter.TryTakeProduct();
                     isGrabed = true;
                 }

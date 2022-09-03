@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 
     public IReadOnlyDictionary<Product, ShelfProductLogic> Shelfs { get; private set; }
     public IReadOnlyDictionary<Product, ProductionBuilding> ProductionBuildings { get; private set; }
+    public IReadOnlyDictionary<ProductionBuilding, Product> RequireProductForProductionBuildings { get; private set; }
+
     public IReadOnlyList<Product> Products { get; private set; }
 
     public static GameManager Instance { get; private set; }
@@ -20,6 +22,7 @@ public class GameManager : MonoBehaviour
         Products = _products;
         Shelfs = FillProductLocationsDictionary<ShelfProductLogic>();
         ProductionBuildings = FillProductLocationsDictionary<ProductionBuilding>();
+        RequireProductForProductionBuildings = FillRequireProductForProductionDictionary();
     }
 
     private IReadOnlyDictionary<Product, T> FillProductLocationsDictionary<T>() where T : ProductsObjectPool
@@ -39,5 +42,20 @@ public class GameManager : MonoBehaviour
         }
 
         return productsLocation;
+    }
+
+    private IReadOnlyDictionary<ProductionBuilding, Product> FillRequireProductForProductionDictionary()
+    {
+        Dictionary<ProductionBuilding, Product> requaireProduct = new();
+
+        foreach(var building in ProductionBuildings.Values)
+        {
+            Product product = building.RequaireProductForProduction;
+
+            if(product != null)
+                requaireProduct.Add(building, product);
+        }
+
+        return requaireProduct;
     }
 }

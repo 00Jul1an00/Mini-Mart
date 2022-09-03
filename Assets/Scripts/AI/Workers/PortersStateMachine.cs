@@ -1,5 +1,9 @@
+using UnityEngine;
+
 public class PortersStateMachine : StateMachine
 {
+    [SerializeField] private bool isProductionToShelf;
+
     public Porter Porter { get; private set; }
 
     private void Start()
@@ -17,6 +21,7 @@ public class PortersStateMachine : StateMachine
     {
         var productionBuilding = GameManager.Instance.ProductionBuildings[Porter.ProductType];
         var shelf = GameManager.Instance.Shelfs[Porter.ProductType];
+
 
         _states.Add(new MoveToShelfState(productionBuilding.transform, _agent, this));
         _states.Add(new GrabItemsState(_agent, productionBuilding, this));

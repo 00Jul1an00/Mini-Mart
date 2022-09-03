@@ -5,12 +5,12 @@ using UnityEngine.AI;
 
 public class PutItemState : BaseState
 {
-    private ShelfProductLogic _shelf;
+    private ProductsObjectPool _productContainer;
     private Porter _porter;
 
-    public PutItemState(NavMeshAgent agent, ShelfProductLogic shelf, PortersStateMachine stateMachine) : base(stateMachine, agent) 
+    public PutItemState(NavMeshAgent agent, ProductsObjectPool productContainer, PortersStateMachine stateMachine) : base(stateMachine, agent) 
     {
-        _shelf = shelf;
+        _productContainer = productContainer;
         _porter = stateMachine.Porter;
     }
 
@@ -20,16 +20,20 @@ public class PutItemState : BaseState
 
     public override void UpdateState()
     {
+        bool canPut = false;
+
         for(int i = 0; i < _porter.InventoryCapacity; i++)
         {
-            if (_shelf.CanAddProduct && _porter.CanPutProduct)
+            if (_productContainer.CanAddProduct && _porter.CanPutProduct)
             {
                 _porter.TryPutProduct();
-                _shelf.TryAddProduct();
+                _productContainer.TryAddProduct();
+                canPut = true;
             }
         }
 
-        _stateMachine.ActivateNextState();
+        if(canPut)
+            _stateMachine.ActivateNextState();
     }
 
     public override void ExitState()

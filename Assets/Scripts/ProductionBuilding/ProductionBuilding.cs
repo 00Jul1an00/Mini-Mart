@@ -6,11 +6,14 @@ public class ProductionBuilding : ProductsObjectPool
 {
     [SerializeField] private int _slotCost;
     [SerializeField] private int _costMultiplair;
+
     [SerializeField] private SlotTriggerChecker _triggerCheker;
+    [SerializeField] private Product _requaireProductForProduction;
 
     private int _activeSlotsForProduction = 2;
     private WaitForSeconds _delayForProduce;
-
+ 
+    public Product RequaireProductForProduction => _requaireProductForProduction;
 
     private void Start()
     {
@@ -32,8 +35,7 @@ public class ProductionBuilding : ProductsObjectPool
     private IEnumerator ProduceProduct()
     {
         while (true)
-        {
-            
+        {          
             yield return _delayForProduce;
 
             if (Index < _activeSlotsForProduction)
@@ -41,11 +43,7 @@ public class ProductionBuilding : ProductsObjectPool
         }
     }
 
-    public void TryRemoveProduct()
-    {
-        if (CanRemoveProduct)
-            SetActiveStatusForProduct(false);
-    }
+
 
     //Покупка слотов для производства, зависим от скрипта Money
     private void BuySlotForProduction()

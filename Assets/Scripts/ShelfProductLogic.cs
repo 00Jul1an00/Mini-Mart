@@ -12,16 +12,4 @@ public class ShelfProductLogic : ProductsObjectPool
     {
         Init();
     }
-
-    public void TryAddProduct()
-    {
-        if (CanAddProduct)
-            SetActiveStatusForProduct(true);
-    }
-
-    public void TryRemoveProduct()
-    {
-        if (CanRemoveProduct)
-            SetActiveStatusForProduct(false);
-    }
 }
