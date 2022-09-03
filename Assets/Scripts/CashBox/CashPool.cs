@@ -8,6 +8,7 @@ public class CashPool : MonoBehaviour
     [SerializeField] private GameObject _prefab;
     [SerializeField] private bool AutoExpand;
     [SerializeField] private Transform _container;
+    private float _posX, _posY, _posZ;
     private int _currentCashCount = 0;
     private List<GameObject> _pool;
 
@@ -17,11 +18,14 @@ public class CashPool : MonoBehaviour
         _container = container;
         CreatePool(count);
     }
-
+    
     private void Start()
     {
+        _posX = 3.3f;
+        _posY = 0.5346044f;
+        _posZ = -38.333f;
+        _container.position = new Vector3(_posX, _posY, _posZ);
         CreatePool(20);
-        _container.position = new Vector3(3.3f, 0.5346045f, -38.33943f);
     }
     private void Update()
     {
@@ -40,7 +44,15 @@ public class CashPool : MonoBehaviour
     private GameObject CreateObject(bool isActiveOnStart = false)
     {
         var createdObject = UnityEngine.Object.Instantiate(_prefab, _container);
-        createdObject.transform.position = _container.position;
+        for (int z = 0; z < 5; z++)
+        {
+            for (int x = 0; x < 5; x++)
+            {
+               
+                _posX += 0.2f;               
+            }
+        }
+        createdObject.transform.position.x += 2f;
         createdObject.SetActive(isActiveOnStart); 
         _pool.Add(createdObject); ;
         return createdObject;
@@ -80,15 +92,8 @@ public class CashPool : MonoBehaviour
     }
 
     private void RenderCash()
-    {      
-        if (_currentCashCount < CashBox.CashBoxMoney)
-        {
-            if (_currentCashCount % 50 == 0)
-            {
-
-            }
-            GetFreeElement();
-            _currentCashCount += 10;
-        }
+    {
+        
+       
     }
 }
