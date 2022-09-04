@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PortersStateMachine : StateMachine
 {
+    [SerializeField] private bool isProductionToShelf;
+
     public Porter Porter { get; private set; }
 
     private void Start()
@@ -17,25 +19,13 @@ public class PortersStateMachine : StateMachine
 
     private void SetStates()
     {
-        ProductsObjectPool firstPoint = null;
-        ProductsObjectPool secondPoint = null;
-
-        if (Porter.IsProductionToShelf)
-        {
-            firstPoint = GameManager.Instance.ProductionBuildings[Porter.ProductType];
-            secondPoint = GameManager.Instance.Shelfs[Porter.ProductType];
-        }
-        else
-        {
-            firstPoint = GameManager.Instance.ProductionBuildings[Porter.ProductType];
-            secondPoint = GameManager.Instance.RequireProductForProductionBuildings[Porter.ProductType];
-        }
-        
+        var productionBuilding = GameManager.Instance.ProductionBuildings[Porter.ProductType];
+        var shelf = GameManager.Instance.Shelfs[Porter.ProductType];
 
 
-        _states.Add(new MoveToShelfState(firstPoint.transform, _agent, this));
-        _states.Add(new GrabItemsState(_agent, firstPoint, this));
-        _states.Add(new MoveToShelfState(secondPoint.transform, _agent, this));
-        _states.Add(new PutItemState(_agent, secondPoint, this));
+        _states.Add(new MoveToShelfState(productionBuilding.transform, _agent, this));
+        _states.Add(new GrabItemsState(_agent, productionBuilding, this));
+        _states.Add(new MoveToShelfState(shelf.NavMeshWayPoint, _agent, this));
+        _states.Add(new PutItemState(_agent, shelf, this));
     }
 }
