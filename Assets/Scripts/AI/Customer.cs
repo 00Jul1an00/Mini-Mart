@@ -8,9 +8,10 @@ public class Customer : MonoBehaviour
     private int _wishListCapacity;
     private List<Product> _inventoryList = new List<Product>();
     private List<Product> _wishList = new List<Product>();
+    private CashBox _cashBox;
 
     public IReadOnlyList<Product> WishList { get; private set; }
-
+   
     public void Init(object sender)
     {
         if(sender is CustomerSpawner)
@@ -46,7 +47,8 @@ public class Customer : MonoBehaviour
 
         foreach (var product in _inventoryList)
             sum += product.Cost;
-
+        _cashBox.MoneySetter(sum, this);
+        
         return sum;
     }
 

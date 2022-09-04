@@ -39,7 +39,7 @@ public class CashBox : MonoBehaviour
     }
     public void MoneySetter(int money, object objectChanger)
     {
-        if (objectChanger is MoveToCashBoxState && money > 0)
+        if (objectChanger is Customer && money > 0)
         {
             CashBoxMoney += money;
         }
