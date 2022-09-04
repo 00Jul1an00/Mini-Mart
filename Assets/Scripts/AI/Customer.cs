@@ -15,7 +15,7 @@ public class Customer : MonoBehaviour
     {
         if(sender is CustomerSpawner)
         {
-            _wishListCapacity = Random.Range(1, _wishListMaxCapacity); //_wishListMaxCapacity + 1
+            _wishListCapacity = Random.Range(1, _wishListMaxCapacity);
             RandomWishList();
             WishList = _wishList;
         }
