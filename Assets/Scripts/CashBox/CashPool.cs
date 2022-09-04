@@ -11,6 +11,7 @@ public class CashPool : MonoBehaviour
     private float _posX, _posY, _posZ;
     private int _currentCashCount = 0;
     private List<GameObject> _pool;
+    
 
     public CashPool (GameObject prefab, int count, Transform container)
     {
@@ -58,9 +59,17 @@ public class CashPool : MonoBehaviour
         return createdObject;
     }
 
-    private void RenderCash()
+    public void RenderCash()
     {
-
+        int packCount = CashBox.CashBoxMoney / 10;
+        for (int i = 0; i < packCount; i++)
+        {
+            if(_container.GetChild(i).gameObject.activeSelf == true)
+            { 
+                i++;          
+            }
+            _container.GetChild(i).gameObject.SetActive(true); 
+        }
     }
 
     private bool HasFreeElement(out GameObject element)
