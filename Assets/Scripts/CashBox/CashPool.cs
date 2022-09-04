@@ -27,35 +27,40 @@ public class CashPool : MonoBehaviour
         _container.position = new Vector3(_posX, _posY, _posZ);
         CreatePool(20);
     }
-    private void Update()
-    {
-        RenderCash();
-    }
-
+    
     private void CreatePool(int count)
     {
         _pool = new List<GameObject>();
         for (int i = 0; i < count; i++)
         {
-            CreateObject();
+            for (int z = 0; z < 3; z++)
+            {
+                for (int x = 0; x < 5; x++)
+                {
+                    CreateObject(_posX, _posY, _posZ);
+                    _posX += 0.2f;
+                }
+                _posX -= 1f;
+                _posZ -= 0.3f;
+            }
+            _posZ += 0.9f;
+            _posY += 0.069f;
         }
     }
 
-    private GameObject CreateObject(bool isActiveOnStart = false)
+    private GameObject CreateObject(float x, float y, float z, bool isActiveOnStart = false)
     {
         var createdObject = UnityEngine.Object.Instantiate(_prefab, _container);
-        for (int z = 0; z < 5; z++)
-        {
-            for (int x = 0; x < 5; x++)
-            {
-               
-                _posX += 0.2f;               
-            }
-        }
-        createdObject.transform.position.x += 2f;
+
+        createdObject.transform.position = new Vector3(x, y, z);
         createdObject.SetActive(isActiveOnStart); 
         _pool.Add(createdObject); ;
         return createdObject;
+    }
+
+    private void RenderCash()
+    {
+
     }
 
     private bool HasFreeElement(out GameObject element)
@@ -82,7 +87,7 @@ public class CashPool : MonoBehaviour
 
         if(AutoExpand)
         {
-            return CreateObject(true);
+            return CreateObject(_posX, _posY, _posZ, true);
         }
         else
         {
@@ -91,9 +96,5 @@ public class CashPool : MonoBehaviour
 
     }
 
-    private void RenderCash()
-    {
-        
-       
-    }
+   
 }
