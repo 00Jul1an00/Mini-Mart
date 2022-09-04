@@ -22,7 +22,7 @@ public class CashBox : MonoBehaviour
     private void Update()
     {
         TakeMoney();
-        
+        CashBoxMoney++;
     }
     private bool OnTriggerEnter(Collider other)
     {

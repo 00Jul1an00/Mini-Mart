@@ -9,6 +9,7 @@ public class Customer : MonoBehaviour
     private List<Product> _inventoryList = new List<Product>();
     private List<Product> _wishList = new List<Product>();
     private CashBox _cashBox;
+    private CashPool _cashPool;
 
     public IReadOnlyList<Product> WishList { get; private set; }
    
@@ -48,7 +49,7 @@ public class Customer : MonoBehaviour
         foreach (var product in _inventoryList)
             sum += product.Cost;
         _cashBox.MoneySetter(sum, this);
-        
+        _cashPool.RenderCash();
         return sum;
     }
 
