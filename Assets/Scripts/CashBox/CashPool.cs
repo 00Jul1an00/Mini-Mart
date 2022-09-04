@@ -52,7 +52,7 @@ public class CashPool : MonoBehaviour
                 _posX += 0.2f;               
             }
         }
-        //createdObject.transform.position.x += 2f;
+        createdObject.transform.position.x += 2f;
         createdObject.SetActive(isActiveOnStart); 
         _pool.Add(createdObject); ;
         return createdObject;
