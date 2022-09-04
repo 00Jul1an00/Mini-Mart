@@ -8,7 +8,7 @@ public class GameManager : MonoBehaviour
 
     public IReadOnlyDictionary<Product, ShelfProductLogic> Shelfs { get; private set; }
     public IReadOnlyDictionary<Product, ProductionBuilding> ProductionBuildings { get; private set; }
-    public IReadOnlyDictionary<Product, ProductionBuilding> RequireProductForProductionBuildings { get; private set; }
+    public IReadOnlyDictionary<Product, ContainerForProductionBuilding> RequireProductContainer { get; private set; }
 
     public IReadOnlyList<Product> Products { get; private set; }
 
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
         Products = _products;
         Shelfs = FillProductLocationsDictionary<ShelfProductLogic>();
         ProductionBuildings = FillProductLocationsDictionary<ProductionBuilding>();
-        RequireProductForProductionBuildings = FillRequireProductForProductionDictionary();
+        RequireProductContainer = FillRequireProductForProductionDictionary();
     }
 
     private IReadOnlyDictionary<Product, T> FillProductLocationsDictionary<T>() where T : ProductsObjectPool
@@ -44,18 +44,18 @@ public class GameManager : MonoBehaviour
         return productsLocation;
     }
 
-    private IReadOnlyDictionary<Product, ProductionBuilding> FillRequireProductForProductionDictionary()
+    private IReadOnlyDictionary<Product, ContainerForProductionBuilding> FillRequireProductForProductionDictionary()
     {
-        Dictionary<Product, ProductionBuilding> requaireProduct = new();
+        Dictionary<Product, ContainerForProductionBuilding> requireProduct = new();
 
         foreach(var building in ProductionBuildings.Values)
         {
             Product product = building.RequaireProductForProduction;
 
             if(product != null)
-                requaireProduct.Add(product, building);
+                requireProduct.Add(product, building.ContainerForRequireProduct);
         }
 
-        return requaireProduct;
+        return requireProduct;
     }
 }

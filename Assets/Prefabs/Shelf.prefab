@@ -156,6 +156,7 @@ MonoBehaviour:
   - {fileID: 6066903140985346594}
   - {fileID: 8797675540323704062}
   - {fileID: 8400311980213365339}
+  _container: {fileID: 849276139505847068}
   _navMeshWayPoint: {fileID: 849276139545782560}
 --- !u!1 &849276139545782561
 GameObject:

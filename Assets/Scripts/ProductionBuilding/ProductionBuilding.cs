@@ -7,13 +7,14 @@ public class ProductionBuilding : ProductsObjectPool
     [SerializeField] private int _slotCost;
     [SerializeField] private int _costMultiplair;
 
-    [SerializeField] private SlotTriggerChecker _triggerCheker;
-    [SerializeField] private Product _requaireProductForProduction;
+    [SerializeField] private SlotTriggerChecker _triggerChecker;
+    [SerializeField] private ContainerForProductionBuilding _containerForRequireProduct;
 
     private int _activeSlotsForProduction = 2;
     private WaitForSeconds _delayForProduce;
- 
-    public Product RequaireProductForProduction => _requaireProductForProduction;
+
+    public ContainerForProductionBuilding ContainerForRequireProduct => _containerForRequireProduct;
+    public Product RequaireProductForProduction => _containerForRequireProduct.ProductType;
 
     private void Start()
     {
@@ -24,31 +25,43 @@ public class ProductionBuilding : ProductsObjectPool
 
     private void OnEnable()
     {
-        _triggerCheker.PlayerEnteredInTrigger += OnPlayerEnterInTrigger;
+        _triggerChecker.PlayerEnteredInTrigger += OnPlayerEnterInTrigger;
     }
 
     private void OnDisable()
     {
-        _triggerCheker.PlayerEnteredInTrigger -= OnPlayerEnterInTrigger;
+        _triggerChecker.PlayerEnteredInTrigger -= OnPlayerEnterInTrigger;
     }
 
     private IEnumerator ProduceProduct()
     {
         while (true)
-        {          
+        {
             yield return _delayForProduce;
 
-            if (Index < _activeSlotsForProduction)
-                SetActiveStatusForProduct(true);
+            if (Index >= _activeSlotsForProduction)
+                continue;
+
+            if (RequaireProductForProduction != null && RequaireProductForProduction.gameObject.activeSelf)
+            {
+                if (_containerForRequireProduct.ProductsInContainerQuantity > 0)
+                {
+                    _containerForRequireProduct.TryRemoveProduct();
+                    TryAddProduct();
+                }
+            }
+            else
+            {
+                TryAddProduct();
+            }            
         }
     }
-
 
 
     //Покупка слотов для производства, зависим от скрипта Money
     private void BuySlotForProduction()
     {
-        if(Money.PlayerMoney >= _slotCost)
+        if (Money.PlayerMoney >= _slotCost)
         {
             Money.SpendMoney(_slotCost);
             _slotCost *= _costMultiplair;

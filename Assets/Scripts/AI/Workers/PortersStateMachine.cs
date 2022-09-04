@@ -28,10 +28,8 @@ public class PortersStateMachine : StateMachine
         else
         {
             firstPoint = GameManager.Instance.ProductionBuildings[Porter.ProductType];
-            secondPoint = GameManager.Instance.RequireProductForProductionBuildings[Porter.ProductType];
+            secondPoint = GameManager.Instance.RequireProductContainer[Porter.ProductType];
         }
-        
-
 
         _states.Add(new MoveToShelfState(firstPoint.transform, _agent, this));
         _states.Add(new GrabItemsState(_agent, firstPoint, this));

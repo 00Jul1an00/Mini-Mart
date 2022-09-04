@@ -7,6 +7,7 @@ public abstract class ProductsObjectPool : MonoBehaviour
 {
     [SerializeField] protected Product _productType;
     [SerializeField] private Transform[] _spawnPoints;
+    [SerializeField] private Transform _container;
 
     public bool CanAddProduct { get { return Index < _productsInObjectPool.Count; } private set { } }
     public bool CanRemoveProduct { get { return Index > 0; } private set { } }
@@ -22,7 +23,7 @@ public abstract class ProductsObjectPool : MonoBehaviour
 
         for(int i = 0; i < capacity; i++)
         {
-            Product product = Instantiate(_productType, _spawnPoints[i].position, Quaternion.identity, transform);
+            Product product = Instantiate(_productType, _spawnPoints[i].position, Quaternion.identity, _container);
             product.gameObject.SetActive(false);
             _productsInObjectPool.Add(product);
         }
