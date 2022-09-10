@@ -5,7 +5,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [SerializeField] private List<Product> _products;
-    [SerializeField] Product test;
 
     public IReadOnlyDictionary<Product, ShelfProductLogic> Shelfs { get; private set; }
     public IReadOnlyDictionary<Product, ProductionBuilding> ProductionBuildings { get; private set; }
@@ -24,8 +23,6 @@ public class GameManager : MonoBehaviour
         Shelfs = FillProductLocationsDictionary<ShelfProductLogic>();
         ProductionBuildings = FillProductLocationsDictionary<ProductionBuilding>();
         RequireProductContainer = FillRequireProductForProductionDictionary();
-
-        ActivateProduct(test);
     }
 
     private IReadOnlyDictionary<Product, T> FillProductLocationsDictionary<T>() where T : ProductsObjectPool
@@ -65,7 +62,6 @@ public class GameManager : MonoBehaviour
     //нужен для акцивации продукта после покупки соответсвующего здания
     public void ActivateProduct(Product product)
     {
-
         if (!_products.Contains(product))
             return;
 

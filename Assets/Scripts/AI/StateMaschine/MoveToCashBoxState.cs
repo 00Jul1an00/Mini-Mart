@@ -23,6 +23,7 @@ public class MoveToCashBoxState : MoveToTargetBaseState
 
     public override void ExitState()
     {
+        _agent.GetComponent<Customer>().PayForProducts();
         _stateMachine.StopCoroutine(DelayBetweenStates(1));
     }  
 }
