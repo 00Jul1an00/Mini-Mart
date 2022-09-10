@@ -7,6 +7,5 @@ public abstract class Product : MonoBehaviour
 
     public float DelayForProduce => _delayForProduce;
     public int Cost => _cost;
-
-    public bool IsAvailable;
+    public bool IsAvailable { get; set; }
 }

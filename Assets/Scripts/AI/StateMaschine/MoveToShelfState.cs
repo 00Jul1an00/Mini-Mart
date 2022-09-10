@@ -9,7 +9,8 @@ public class MoveToShelfState : MoveToTargetBaseState
 
     public override void EnterState()
     {
-        _agent.destination = _target.position;
+        _agent.destination = _target.position + ((Vector3)Random.insideUnitCircle);
+        Debug.Log(_agent.destination);
     }
     public override void UpdateState()
     {

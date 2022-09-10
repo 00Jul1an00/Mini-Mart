@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _cost: 10
-  IsAvailable: 1
+  _delayForProduce: 4
 --- !u!1 &257658187529179821
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,7 +31,6 @@ public class CustomerStateMachine : StateMachine
 
             _states.Add(new MoveToShelfState(shelf.transform, _agent, this));
             _states.Add(new GrabItemsState(_agent, shelf, this));
-        }
-        
+        }       
     }
 }
