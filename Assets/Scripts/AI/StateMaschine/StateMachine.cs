@@ -6,7 +6,7 @@ using System;
 
 public abstract class StateMachine : MonoBehaviour
 {
-    [SerializeField] protected ObstacleAgent _agent;
+    [SerializeField] protected NavMeshAgent _agent;
 
     protected List<BaseState> _states = new();
     protected BaseState _currentState;

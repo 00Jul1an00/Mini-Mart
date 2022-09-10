@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 890715789693349637}
   - component: {fileID: 890715789693349634}
   - component: {fileID: 890715789693349635}
-  - component: {fileID: -2349265258082888821}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Porter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -116,6 +115,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _agent: {fileID: 890715789693349634}
+  _firstShelf: {fileID: 0}
+  _secondShelf: {fileID: 0}
 --- !u!114 &890715789693349637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -131,7 +132,6 @@ MonoBehaviour:
   _speed: 3.5
   _productType: {fileID: 8808740649812844418, guid: 7d4ffceb305b49e44ad107348ab0dee4, type: 3}
   _inventoryCapacity: 5
-  _isProductionToShelf: 0
 --- !u!195 &890715789693349634
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -170,17 +170,3 @@ NavMeshObstacle:
   m_CarveOnlyStationary: 1
   m_Center: {x: 0, y: 0, z: 0}
   m_TimeToStationary: 0.5
---- !u!114 &-2349265258082888821
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 890715789693349632}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba37bd61890ca143829e0dcefd74564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _carvingTime: 0.5
-  _carvingMoveThreshold: 0.1

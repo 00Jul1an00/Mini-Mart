@@ -8,16 +8,16 @@ public class MoveToExitState : MoveToTargetBaseState
 {
     public static event UnityAction IsDestroy;
 
-    public MoveToExitState(Transform target, ObstacleAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
+    public MoveToExitState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
 
     public override void EnterState()
     {
-        _agent.SetDestionation(_target.position);
+        _agent.destination = _target.position;
     }
 
     public override void UpdateState()
     {
-        if (_agent.IsReachedDestination)
+        if (CheckDistance())
         {
             MonoBehaviour.Destroy(_agent.gameObject);
             IsDestroy?.Invoke();

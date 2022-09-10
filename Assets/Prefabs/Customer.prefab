@@ -16,8 +16,7 @@ GameObject:
   - component: {fileID: 3489108180956658366}
   - component: {fileID: 3489108180956658367}
   - component: {fileID: 3489108180956658360}
-  - component: {fileID: 2438427491199817020}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Customer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 68b9e840fcfb5a14da6e8690fa3c31fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent: {fileID: 2438427491199817020}
+  _agent: {fileID: 3489108180956658354}
 --- !u!114 &3489108180956658360
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -167,17 +166,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _wishListMaxCapacity: 1
---- !u!114 &2438427491199817020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3489108180956658359}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4ba37bd61890ca143829e0dcefd74564, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _carvingTime: 0.5
-  _carvingMoveThreshold: 0.1
