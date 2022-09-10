@@ -13,7 +13,7 @@ public abstract class BaseState
         _agent = agent;
     }
 
-    protected IEnumerator DelayBetweenStates(float animationDuration)
+    protected virtual IEnumerator DelayBetweenStates(float animationDuration)
     {
         _agent.isStopped = true;
         yield return new WaitForSeconds(animationDuration);

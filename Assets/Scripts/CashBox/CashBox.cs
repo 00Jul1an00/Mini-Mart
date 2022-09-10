@@ -2,18 +2,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(CashPool))]
 public class CashBox : MonoBehaviour
 {
     [SerializeField] private GameObject _playerZone;
+    
     public Transform CashTransform;
+
     private float _moneyTakeDistance = 2f;
     private bool _isCashierBought;
-    public static int CashBoxMoney { get; private set; } = 0;
     private bool _isCustomerServed;
+    private CashPool _cashPool;
+
+    public static int CashBoxMoney { get; private set; } = 0;
 
     private void Start()
     {
         CashTransform = GetComponent<Transform>();
+        _cashPool = GetComponent<CashPool>();
     }
     private IEnumerator ServingClient()
     {
@@ -22,7 +28,7 @@ public class CashBox : MonoBehaviour
     private void Update()
     {
         TakeMoney();
-        CashBoxMoney++;
+        //CashBoxMoney++; - ловушка димасика
     }
     private bool OnTriggerEnter(Collider other)
     {
@@ -42,6 +48,7 @@ public class CashBox : MonoBehaviour
         if (objectChanger is Customer && money > 0)
         {
             CashBoxMoney += money;
+            _cashPool.RenderCash();
         }
     }
 
@@ -52,12 +59,6 @@ public class CashBox : MonoBehaviour
         {
             Money.AddMoney(CashBoxMoney);
             CashBoxMoney = 0;
-            
-        }    
-        
-    }
-
-    
-
-    
+        }       
+    } 
 }

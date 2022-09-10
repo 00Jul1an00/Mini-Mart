@@ -8,8 +8,6 @@ public class Customer : MonoBehaviour
     private int _wishListCapacity;
     private List<Product> _inventoryList = new List<Product>();
     private List<Product> _wishList = new List<Product>();
-    private CashBox _cashBox;
-    private CashPool _cashPool;
 
     public IReadOnlyList<Product> WishList { get; private set; }
    
@@ -42,15 +40,14 @@ public class Customer : MonoBehaviour
         }
     }
 
-    public int PayForProducts()
+    public void PayForProducts(CashBox cashBox)
     {
         int sum = 0;
 
         foreach (var product in _inventoryList)
             sum += product.Cost;
-        _cashBox.MoneySetter(sum, this);
-        _cashPool.RenderCash();
-        return sum;
+
+        cashBox.MoneySetter(sum, this);
     }
 
     private void RandomWishList()

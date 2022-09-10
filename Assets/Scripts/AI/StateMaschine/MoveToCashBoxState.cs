@@ -5,7 +5,15 @@ using UnityEngine.AI;
 
 public class MoveToCashBoxState : MoveToTargetBaseState
 {
-    public MoveToCashBoxState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
+    private CashBox _cashBox;
+    private Customer _customer;
+    private bool _isCalled = true;
+
+    public MoveToCashBoxState(Transform target, NavMeshAgent agent, CustomerStateMachine stateMachine, CashBox cashBox) : base(target, agent, stateMachine) 
+    {
+        _customer = stateMachine.Customer;
+        _cashBox = cashBox;
+    }
 
     public override void EnterState()
     {
@@ -14,16 +22,22 @@ public class MoveToCashBoxState : MoveToTargetBaseState
 
     public override void UpdateState()
     {
-        if (CheckDistance())
+        if (CheckDistance() && _isCalled)
         {
             _stateMachine.StartCoroutine(DelayBetweenStates(1));
-            _stateMachine.ActivateNextState();
+            _isCalled = false;
         }
     }
 
     public override void ExitState()
     {
-        _agent.GetComponent<Customer>().PayForProducts();
+        _customer.PayForProducts(_cashBox);
         _stateMachine.StopCoroutine(DelayBetweenStates(1));
-    }  
+    }
+
+    protected override IEnumerator DelayBetweenStates(float animationDuration)
+    {
+        yield return base.DelayBetweenStates(animationDuration);
+        _stateMachine.ActivateNextState();
+    }
 }
