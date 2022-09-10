@@ -5,9 +5,9 @@ using UnityEngine.AI;
 public abstract class BaseState
 {
     protected StateMachine _stateMachine;
-    protected NavMeshAgent _agent;
+    protected ObstacleAgent _agent;
 
-    public BaseState(StateMachine stateMachine, NavMeshAgent agent)
+    public BaseState(StateMachine stateMachine, ObstacleAgent agent)
     {
         _stateMachine = stateMachine;
         _agent = agent;
@@ -15,9 +15,9 @@ public abstract class BaseState
 
     protected virtual IEnumerator DelayBetweenStates(float animationDuration)
     {
-        _agent.isStopped = true;
+        _agent.StopAgent();
         yield return new WaitForSeconds(animationDuration);
-        _agent.isStopped = false;
+        _agent.ResumeAgent();
     }
 
     public abstract void EnterState();

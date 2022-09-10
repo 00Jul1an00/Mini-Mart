@@ -7,7 +7,7 @@ public class PortersStateMachine : StateMachine
     private void Start()
     {
         Porter = GetComponent<Porter>();
-        _agent.speed = Porter.Speed;
+        _agent.Speed = Porter.Speed;
 
         SetStates();
 

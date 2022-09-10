@@ -7,7 +7,7 @@ public class GrabItemsState : BaseState
 {
     private readonly ProductsObjectPool _productContainer;
 
-    public GrabItemsState(NavMeshAgent agent, ProductsObjectPool productContainer, StateMachine stateMachine) : base(stateMachine, agent)
+    public GrabItemsState(ObstacleAgent agent, ProductsObjectPool productContainer, StateMachine stateMachine) : base(stateMachine, agent)
     {
         _productContainer = productContainer;
     }
