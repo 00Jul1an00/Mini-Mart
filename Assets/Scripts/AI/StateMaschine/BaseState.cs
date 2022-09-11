@@ -5,9 +5,9 @@ using UnityEngine.AI;
 public abstract class BaseState
 {
     protected StateMachine _stateMachine;
-    protected NavMeshAgent _agent;
+    protected AIUnit _agent;
 
-    public BaseState(StateMachine stateMachine, NavMeshAgent agent)
+    public BaseState(StateMachine stateMachine, AIUnit agent)
     {
         _stateMachine = stateMachine;
         _agent = agent;

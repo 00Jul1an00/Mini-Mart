@@ -14,8 +14,8 @@ GameObject:
   - component: {fileID: 890715789693349639}
   - component: {fileID: 890715789693349636}
   - component: {fileID: 890715789693349637}
-  - component: {fileID: 890715789693349634}
-  - component: {fileID: 890715789693349635}
+  - component: {fileID: -4904018616950616013}
+  - component: {fileID: 8846601914788219916}
   m_Layer: 0
   m_Name: Porter
   m_TagString: Untagged
@@ -114,9 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 336bdf62422e60743b77189e1f3a0477, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _agent: {fileID: 890715789693349634}
-  _firstShelf: {fileID: 0}
-  _secondShelf: {fileID: 0}
+  _agent: {fileID: 8846601914788219916}
 --- !u!114 &890715789693349637
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -132,7 +130,8 @@ MonoBehaviour:
   _speed: 3.5
   _productType: {fileID: 8808740649812844418, guid: 7d4ffceb305b49e44ad107348ab0dee4, type: 3}
   _inventoryCapacity: 5
---- !u!195 &890715789693349634
+  _isProductionToShelf: 0
+--- !u!195 &-4904018616950616013
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -144,7 +143,7 @@ NavMeshAgent:
   m_Radius: 0.5
   m_Speed: 3.5
   m_Acceleration: 8
-  avoidancePriority: 50
+  avoidancePriority: 1
   m_AngularSpeed: 120
   m_StoppingDistance: 0
   m_AutoTraverseOffMeshLink: 1
@@ -154,19 +153,16 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!208 &890715789693349635
-NavMeshObstacle:
+--- !u!114 &8846601914788219916
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 890715789693349632}
   m_Enabled: 1
-  serializedVersion: 3
-  m_Shape: 0
-  m_Extents: {x: 0.5, y: 1, z: 0.5}
-  m_MoveThreshold: 0.1
-  m_Carve: 0
-  m_CarveOnlyStationary: 1
-  m_Center: {x: 0, y: 0, z: 0}
-  m_TimeToStationary: 0.5
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 201633e92a37955448932e36bd00c510, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _agent: {fileID: -4904018616950616013}

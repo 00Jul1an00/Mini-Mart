@@ -8,11 +8,11 @@ public class MoveToExitState : MoveToTargetBaseState
 {
     public static event UnityAction IsDestroy;
 
-    public MoveToExitState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
+    public MoveToExitState(Transform target, AIUnit agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
 
     public override void EnterState()
     {
-        _agent.destination = _target.position;
+        AIManager.Instance.MakeAgentsCircleTarget(_target.transform, _agent);
     }
 
     public override void UpdateState()
@@ -20,6 +20,7 @@ public class MoveToExitState : MoveToTargetBaseState
         if (CheckDistance())
         {
             MonoBehaviour.Destroy(_agent.gameObject);
+            AIManager.Instance.Units.Remove(_agent);
             IsDestroy?.Invoke();
         }
     }
