@@ -28,6 +28,7 @@ public class CashBox : MonoBehaviour
     private void Update()
     {
         TakeMoney();
+        print(CashBoxMoney);
         //CashBoxMoney++; - ловушка димасика
     }
     private bool OnTriggerEnter(Collider other)
