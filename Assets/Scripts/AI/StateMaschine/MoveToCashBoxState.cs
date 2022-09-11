@@ -9,7 +9,7 @@ public class MoveToCashBoxState : MoveToTargetBaseState
     private Customer _customer;
     private bool _isCalled = true;
 
-    public MoveToCashBoxState(Transform target, NavMeshAgent agent, CustomerStateMachine stateMachine, CashBox cashBox) : base(target, agent, stateMachine) 
+    public MoveToCashBoxState(Transform target, AIUnit agent, CustomerStateMachine stateMachine, CashBox cashBox) : base(target, agent, stateMachine) 
     {
         _customer = stateMachine.Customer;
         _cashBox = cashBox;
@@ -17,7 +17,7 @@ public class MoveToCashBoxState : MoveToTargetBaseState
 
     public override void EnterState()
     {
-        _agent.destination = _target.position;
+        AIManager.Instance.MakeAgentsCircleTarget(_target.transform, _agent);
     }
 
     public override void UpdateState()

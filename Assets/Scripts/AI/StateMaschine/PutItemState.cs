@@ -8,7 +8,7 @@ public class PutItemState : BaseState
     private ProductsObjectPool _productContainer;
     private Porter _porter;
 
-    public PutItemState(NavMeshAgent agent, ProductsObjectPool productContainer, PortersStateMachine stateMachine) : base(stateMachine, agent) 
+    public PutItemState(AIUnit agent, ProductsObjectPool productContainer, PortersStateMachine stateMachine) : base(stateMachine, agent) 
     {
         _productContainer = productContainer;
         _porter = stateMachine.Porter;

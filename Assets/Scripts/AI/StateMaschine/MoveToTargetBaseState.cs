@@ -7,7 +7,7 @@ public abstract class MoveToTargetBaseState : BaseState
 {
     protected Transform _target;
 
-    public MoveToTargetBaseState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(stateMachine, agent)
+    public MoveToTargetBaseState(Transform target, AIUnit agent, StateMachine stateMachine) : base(stateMachine, agent)
     {
         _target = target;
     }

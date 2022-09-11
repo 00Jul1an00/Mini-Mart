@@ -5,11 +5,11 @@ using UnityEngine.AI;
 
 public class MoveToShelfState : MoveToTargetBaseState
 {
-    public MoveToShelfState(Transform target, NavMeshAgent agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
+    public MoveToShelfState(Transform target, AIUnit agent, StateMachine stateMachine) : base(target, agent, stateMachine) { }
 
     public override void EnterState()
     {
-        _agent.destination = _target.position + ((Vector3)Random.insideUnitCircle);
+        AIManager.Instance.MakeAgentsCircleTarget(_target.transform, _agent);
     }
     public override void UpdateState()
     {
