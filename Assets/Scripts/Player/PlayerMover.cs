@@ -38,8 +38,24 @@ public class PlayerMover : MonoBehaviour
         }
     }
 
+    //TESTING
+    private Stack<Product> _inventory = new();
+    private int _capacity = 2;
     
+    public void TakeProduct(Product product)
+    {
+        if (_inventory.Count < _capacity)
+            _inventory.Push(product);
 
+        print(_inventory.Count);
+    }
+
+    public void PutProduct(Product product)
+    {
+        if (_inventory.Count > 0 && _inventory.Peek() == product)
+            _inventory.Pop();
+        print(_inventory.Count);
+    }
 
 
 }

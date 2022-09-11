@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class SlotTriggerChecker : MonoBehaviour
 {
-    [SerializeField] private float _delay;
+    [SerializeField] protected float _delay;
 
     public event Action PlayerEnteredInTrigger;
 

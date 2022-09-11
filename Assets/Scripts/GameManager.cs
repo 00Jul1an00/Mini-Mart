@@ -28,7 +28,7 @@ public class GameManager : MonoBehaviour
     private IReadOnlyDictionary<Product, T> FillProductLocationsDictionary<T>() where T : ProductsObjectPool
     {
         Dictionary<Product, T> productsLocation = new();
-        var allShelfs = FindObjectsOfType<T>();
+        T[] allShelfs = FindObjectsOfType<T>();
 
         foreach (var product in Products)
         {   

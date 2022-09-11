@@ -7,9 +7,10 @@ public class ProductionBuilding : ProductsObjectPool
     [SerializeField] private int _slotCost;
     [SerializeField] private int _costMultiplair;
 
-    [SerializeField] private SlotTriggerChecker _triggerChecker;
     [SerializeField] private ContainerForProductionBuilding _containerForRequireProduct;
 
+    private SlotTriggerChecker _triggerChecker;
+    private SlotTriggerChecker[] _triggerCheckers;
     private int _activeSlotsForProduction = 2;
     private WaitForSeconds _delayForProduce;
 
@@ -20,17 +21,31 @@ public class ProductionBuilding : ProductsObjectPool
     {
         Init();
         _delayForProduce = new WaitForSeconds(ProductType.DelayForProduce);
-        StartCoroutine(ProduceProduct());
+        _triggerCheckers = SetStartStatusToSlots();
     }
 
     private void OnEnable()
     {
-        _triggerChecker.PlayerEnteredInTrigger += OnPlayerEnterInTrigger;
+        StartCoroutine(ProduceProduct());
     }
 
-    private void OnDisable()
+    private SlotTriggerChecker[] SetStartStatusToSlots()
     {
-        _triggerChecker.PlayerEnteredInTrigger -= OnPlayerEnterInTrigger;
+        SlotTriggerChecker[] triggers = GetComponentsInChildren<SlotTriggerChecker>();
+
+        foreach (var trigger in triggers)
+            trigger.gameObject.SetActive(false);
+
+        for (int i = 0; i < _activeSlotsForProduction; i++)
+        {
+            Destroy(triggers[i].gameObject);
+        }
+
+        _triggerChecker = triggers[_activeSlotsForProduction];
+        _triggerChecker.gameObject.SetActive(true);
+        _triggerChecker.PlayerEnteredInTrigger += OnPlayerEnterInTrigger;
+
+        return triggers;
     }
 
     private IEnumerator ProduceProduct()
@@ -42,7 +57,7 @@ public class ProductionBuilding : ProductsObjectPool
             if (Index >= _activeSlotsForProduction)
                 continue;
 
-            if (RequaireProductForProduction != null && RequaireProductForProduction.gameObject.activeSelf)
+            if (RequaireProductForProduction != null)
             {
                 if (_containerForRequireProduct.ProductsInContainerQuantity > 0)
                 {
@@ -63,8 +78,20 @@ public class ProductionBuilding : ProductsObjectPool
     {
         if (Money.PlayerMoney >= _slotCost)
         {
+            _triggerChecker.PlayerEnteredInTrigger -= OnPlayerEnterInTrigger;
+            Destroy(_triggerChecker.gameObject);
             Money.SpendMoney(_slotCost);
             _slotCost *= _costMultiplair;
+            _activeSlotsForProduction++;
+
+            if (_activeSlotsForProduction < _triggerCheckers.Length)
+            {
+                _triggerChecker = _triggerCheckers[_activeSlotsForProduction];
+                _triggerChecker.gameObject.SetActive(true);
+                _triggerChecker.PlayerEnteredInTrigger += OnPlayerEnterInTrigger;
+            }
+            else
+                _triggerCheckers = null;
         }
     }
 

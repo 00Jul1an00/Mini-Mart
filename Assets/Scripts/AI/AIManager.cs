@@ -8,8 +8,6 @@ public class AIManager : MonoBehaviour
     private static AIManager _instance;
     public static AIManager Instance { get { return _instance; } private set { _instance = value; } }
 
-    [SerializeField] private float _radiusAroundTarget = .5f;
-
     public List<AIUnit> Units = new();
 
     private void Awake()
@@ -30,6 +28,5 @@ public class AIManager : MonoBehaviour
                 );
 
         unit.MoveTo(pos);
-        print(pos);
     }
 }
