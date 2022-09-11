@@ -5,20 +5,12 @@ using System;
 
 public class CashPool : MonoBehaviour
 {
-    [SerializeField] private GameObject _prefab;
-    [SerializeField] private bool AutoExpand;
+    [SerializeField] private GameObject _prefab;   
     [SerializeField] private Transform _container;
     private float _posX, _posY, _posZ;
     private int _currentCashCount = 0;
     private List<GameObject> _pool;
-    
-
-    public CashPool (GameObject prefab, int count, Transform container)
-    {
-        _prefab = prefab;
-        _container = container;
-        CreatePool(count);
-    }
+       
     
     private void Start()
     {
@@ -63,47 +55,26 @@ public class CashPool : MonoBehaviour
     {
         int packCount = CashBox.CashBoxMoney / 10;
         for (int i = 0; i < packCount; i++)
-        {
-            if(_container.GetChild(i).gameObject.activeSelf == true)
-            { 
-                i++;          
-            }
-            _container.GetChild(i).gameObject.SetActive(true); 
-        }
-    }
-
-    private bool HasFreeElement(out GameObject element)
-    {
-        foreach (var obj in _pool)
-        {
-            if (!obj.gameObject.activeInHierarchy)
+        {                       
+            if(_container.GetChild(i).gameObject.activeSelf == false)
             {
-                element = obj;
-                obj.gameObject.SetActive(true);
-                return true;
+                _container.GetChild(i).gameObject.SetActive(true);
             }
+            
         }
-        element = null;
-        return false;
     }
 
-    private GameObject GetFreeElement()
+    public void DisableCash()
     {
-        if(HasFreeElement(out var element))
+        for (int i = 0; i < _container.childCount; i++)
         {
-            return element;
+            _container.GetChild(i).gameObject.SetActive(false);
         }
-
-        if(AutoExpand)
-        {
-            return CreateObject(_posX, _posY, _posZ, true);
-        }
-        else
-        {
-            throw new Exception("Нема");
-        }
-
     }
+
+    
+
+    
 
    
 }

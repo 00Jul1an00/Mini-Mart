@@ -142,6 +142,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f72e8a69dd4dbb74b83aa3cc8c7e78fb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _cost: 5
+  _cost: 10
   _delayForProduce: 2
   IsAvailable: 1

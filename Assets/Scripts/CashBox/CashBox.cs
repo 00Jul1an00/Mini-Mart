@@ -9,7 +9,7 @@ public class CashBox : MonoBehaviour
     
     public Transform CashTransform;
 
-    private float _moneyTakeDistance = 2f;
+    private float _moneyTakeDistance = 3f;
     private bool _isCashierBought;
     private bool _isCustomerServed;
     private CashPool _cashPool;
@@ -28,13 +28,13 @@ public class CashBox : MonoBehaviour
     private void Update()
     {
         TakeMoney();
-        print(CashBoxMoney);
-        //CashBoxMoney++; - ловушка димасика
+        print(CashBoxMoney + " " + Money.PlayerMoney);       
     }
-    private bool OnTriggerEnter(Collider other)
+    private bool OnTriggerEnter(Collider other) // если шо, коллайдер висит на родителе, а не на дочернем квадрате
     {
         if (other.TryGetComponent<PlayerMover>(out PlayerMover player))
         {
+            print("работает");
             StartCoroutine(ServingClient());
             return _isCustomerServed = true;           
         }      
@@ -60,6 +60,7 @@ public class CashBox : MonoBehaviour
         {
             Money.AddMoney(CashBoxMoney);
             CashBoxMoney = 0;
+            _cashPool.DisableCash();
         }       
     } 
 }
