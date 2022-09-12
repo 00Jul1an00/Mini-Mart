@@ -7,9 +7,9 @@ public class ContainerForProductionBuilding : ProductsObjectPool
 
     [SerializeField] private float _animationDuration = 1f;
 
-    public int ProductsInContainerQuantity => Index;
+    private Coroutine _coroutine;
 
-    private bool _isNotCalled;
+    public int ProductsInContainerQuantity => Index;
 
     private void Start()
     {
@@ -18,11 +18,9 @@ public class ContainerForProductionBuilding : ProductsObjectPool
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.TryGetComponent(out PlayerMover player) && _isNotCalled)
-        {
-            print("enter2");
-            _isNotCalled = false;
-            StartCoroutine(WaitForEndAnimationDelay(player));
+        if (other.TryGetComponent(out PlayerMover player))
+        {     
+            _coroutine = StartCoroutine(WaitForEndAnimationDelay(player));
         }
     }
 
@@ -31,19 +29,20 @@ public class ContainerForProductionBuilding : ProductsObjectPool
         if (other.TryGetComponent(out PlayerMover player))
         {
             print("exit2");
-            _isNotCalled = true;
-            StopCoroutine(WaitForEndAnimationDelay(player));
+            StopCoroutine(_coroutine);
         }    
     }
 
     private IEnumerator WaitForEndAnimationDelay(PlayerMover player)
     {
-        if (CanAddProduct)
+        while (CanAddProduct)
         {
             yield return new WaitForSeconds(_animationDuration);
-            
-            if(player.TryPutProduct(_productType))
+
+            if (player.TryPutProduct(_productType))
                 AddProduct();
+            else
+                yield break;
         }
     }
 }

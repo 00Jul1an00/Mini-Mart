@@ -6,12 +6,12 @@ using UnityEngine;
 //сделать абстрактным и додумать логику наследования
 public class PlayerInteracter : MonoBehaviour
 {
-    [SerializeField] private float _animationDuration = 1f;
+    [SerializeField] private float _animationDuration = 2f;
 
     protected Action _action;
 
     private ProductsObjectPool _building;
-    private bool _isNotYetCalled;
+    private Coroutine _coroutine;
 
     private void Start()
     {
@@ -24,32 +24,30 @@ public class PlayerInteracter : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.TryGetComponent(out PlayerMover player) && _isNotYetCalled)
-        {
-            print("enter");
-            _isNotYetCalled = false;
-            StartCoroutine(WaitForAnimationEnd(player, _building.CanRemoveProduct));
+        if (other.TryGetComponent(out PlayerMover player))
+        {       
+            _coroutine = StartCoroutine(WaitForAnimationEnd(player, _building.CanRemoveProduct));
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
-
         if (other.TryGetComponent(out PlayerMover player))
         {
             print("exit");
-            _isNotYetCalled = true;
-            StartCoroutine(WaitForAnimationEnd(player, _building.CanRemoveProduct));
+            StopCoroutine(_coroutine);
         }
     }
 
     protected IEnumerator WaitForAnimationEnd(PlayerMover player, bool condition)
     {
-        if (condition && player.CanTakeProduct)
+        while (condition && player.CanTakeProduct)
         {
             yield return new WaitForSeconds(_animationDuration);
+            print("enter");
             _action();
             player.TakeProduct(_building.ProductType);
+            
         }
     }
 }
