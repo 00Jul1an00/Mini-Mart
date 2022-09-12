@@ -6,15 +6,11 @@ using UnityEngine.Events;
 public class Shelf : MonoBehaviour
 {
     [SerializeField] private GameObject _spendZone;
-    [SerializeField] private int ShelfCost;
+    [SerializeField] private int ShelfCost;   
     private bool _isShelfBought;
 
     private event UnityAction<int> MoneyChanged;
-
-    private void Start()
-    {
-        
-    }
+   
     private void Update()
     {
         

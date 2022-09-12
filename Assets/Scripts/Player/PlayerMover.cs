@@ -10,6 +10,8 @@ public class PlayerMover : MonoBehaviour
     private Vector3 _directionVector;
     private float _playerSpeed = 5f;
     public static Transform PlayerTransform;
+    
+    
 
     void Start()
     {
@@ -24,11 +26,14 @@ public class PlayerMover : MonoBehaviour
         Movement();        
     }
 
+    
     private void Movement()
-    {      
+    {
+        
         _directionVector.x = Input.GetAxis("Horizontal") * _playerSpeed;
         _directionVector.z = Input.GetAxis("Vertical") * _playerSpeed;
         _chController.Move(_directionVector * Time.deltaTime);
+        //_rigidBody.AddForce(transform.up * -1);
 
 
         if (Vector3.Angle(Vector3.forward, _directionVector) > 1 || Vector3.Angle(Vector3.forward, _directionVector) == 0)

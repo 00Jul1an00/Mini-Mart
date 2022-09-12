@@ -12,7 +12,7 @@ public class ProductionBuilding : ProductsObjectPool
     private SlotTriggerChecker _triggerChecker;
     private SlotTriggerChecker[] _triggerCheckers;
     private int _activeSlotsForProduction = 2;
-    private WaitForSeconds _delayForProduce;
+    private WaitForSeconds _delayForProduce;   
 
     public ContainerForProductionBuilding ContainerForRequireProduct => _containerForRequireProduct;
     public Product RequaireProductForProduction => _containerForRequireProduct.ProductType;
@@ -21,7 +21,7 @@ public class ProductionBuilding : ProductsObjectPool
     {
         Init();
         _delayForProduce = new WaitForSeconds(ProductType.DelayForProduce);
-        _triggerCheckers = SetStartStatusToSlots();
+        _triggerCheckers = SetStartStatusToSlots();      
     }
 
     private void OnEnable()

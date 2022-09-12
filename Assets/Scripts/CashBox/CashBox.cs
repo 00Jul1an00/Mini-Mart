@@ -19,6 +19,7 @@ public class CashBox : MonoBehaviour
     private bool _cashierIsBought;
     private float _moneyTakeDistance = 3f;
     private CashPool _cashPool;
+    private Money _money;
 
     public int CashBoxMoney { get; private set; } = 0;
 
@@ -26,6 +27,7 @@ public class CashBox : MonoBehaviour
     {
         CashTransform = GetComponent<Transform>();
         _cashPool = GetComponent<CashPool>();
+        _money = GetComponent<Money>();
     }
 
     //Change
