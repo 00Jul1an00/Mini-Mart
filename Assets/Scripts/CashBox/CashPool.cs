@@ -7,13 +7,15 @@ public class CashPool : MonoBehaviour
 {
     [SerializeField] private GameObject _prefab;   
     [SerializeField] private Transform _container;
+
     private float _posX, _posY, _posZ;
     private int _currentCashCount = 0;
     private List<GameObject> _pool;
-       
+    private CashBox _cashBox;   
     
     private void Start()
     {
+        _cashBox = GetComponent<CashBox>();
         _posX = 3.3f;
         _posY = 0.5346044f;
         _posZ = -38.333f;
@@ -53,7 +55,7 @@ public class CashPool : MonoBehaviour
 
     public void RenderCash()
     {
-        int packCount = CashBox.CashBoxMoney / 10;
+        int packCount = _cashBox.CashBoxMoney / 10;
         for (int i = 0; i < packCount; i++)
         {                       
             if(_container.GetChild(i).gameObject.activeSelf == false)

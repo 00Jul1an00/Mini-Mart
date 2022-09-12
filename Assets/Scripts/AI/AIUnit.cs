@@ -15,7 +15,7 @@ public class AIUnit : MonoBehaviour
     private void Start()
     {
         _agent = GetComponent<NavMeshAgent>();
-        AIManager.Instance.Units.Add(this);
+        AIManager.Instance.AddUnit(this);
     }
 
     public void MoveTo(Vector3 pos)

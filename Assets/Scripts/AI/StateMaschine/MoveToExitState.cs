@@ -20,7 +20,7 @@ public class MoveToExitState : MoveToTargetBaseState
         if (CheckDistance())
         {
             MonoBehaviour.Destroy(_agent.gameObject);
-            AIManager.Instance.Units.Remove(_agent);
+            AIManager.Instance.RemoveUnit(_agent);
             IsDestroy?.Invoke();
         }
     }

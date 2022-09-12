@@ -5,6 +5,7 @@ using UnityEngine;
 public class BuyProductionBuilding : SlotTriggerChecker
 {
     [SerializeField] private ProductionBuilding _productionBuilding;
+    [SerializeField] private float _cost;
 
     private void Start()
     {
@@ -18,8 +19,12 @@ public class BuyProductionBuilding : SlotTriggerChecker
 
     private void OnPlayerEnterInTrigger()
     {
-        _productionBuilding.gameObject.SetActive(true);
-        GameManager.Instance.Shelfs[_productionBuilding.ProductType].gameObject.SetActive(true);
-        Destroy(this.gameObject);
+        if(_cost < Money.PlayerMoney)
+        {
+            _productionBuilding.gameObject.SetActive(true);
+            GameManager.Instance.Shelfs[_productionBuilding.ProductType].gameObject.SetActive(true);
+            GameManager.Instance.ActivateProduct(_productionBuilding.ProductType);
+            Destroy(this.gameObject);
+        }
     }
 }

@@ -7,7 +7,7 @@ public class MoveToCashBoxState : MoveToTargetBaseState
 {
     private CashBox _cashBox;
     private Customer _customer;
-    private bool _isCalled = true;
+    private bool _isNotYetCalled = true;
 
     public MoveToCashBoxState(Transform target, AIUnit agent, CustomerStateMachine stateMachine, CashBox cashBox) : base(target, agent, stateMachine) 
     {
@@ -22,22 +22,29 @@ public class MoveToCashBoxState : MoveToTargetBaseState
 
     public override void UpdateState()
     {
-        if (CheckDistance() && _isCalled)
+        if (CheckDistance() && _isNotYetCalled && _cashBox.CanBeServed)
         {
-            _stateMachine.StartCoroutine(DelayBetweenStates(1));
-            _isCalled = false;
+            _stateMachine.StartCoroutine(DelayBetweenStates(_cashBox.TimeToServe));
+            _isNotYetCalled = false;
         }
     }
 
     public override void ExitState()
     {
         _customer.PayForProducts(_cashBox);
-        _stateMachine.StopCoroutine(DelayBetweenStates(1));
+        _stateMachine.StopCoroutine(DelayBetweenStates(_cashBox.TimeToServe));
     }
 
     protected override IEnumerator DelayBetweenStates(float animationDuration)
     {
         yield return base.DelayBetweenStates(animationDuration);
+        
+        if (!_cashBox.CanBeServed)
+        {
+            _isNotYetCalled = true;
+            yield break;
+        }
+
         _stateMachine.ActivateNextState();
     }
 }

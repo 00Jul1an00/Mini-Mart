@@ -6,51 +6,55 @@ using UnityEngine;
 public class CashBox : MonoBehaviour
 {
     [SerializeField] private GameObject _playerZone;
-    
+    [SerializeField] private SlotTriggerChecker _slotTriggerChecker;
+    [SerializeField] private Cashier _cashier;
+    [SerializeField] private float _cashierCost;
+    [SerializeField] private Transform _positionForCashier;
+
     public Transform CashTransform;
 
+    public bool CanBeServed { get; private set; }
+    public float TimeToServe { get; private set; } = 3f;
+
+    private bool _cashierIsBought;
     private float _moneyTakeDistance = 3f;
-    private bool _isCashierBought;
-    private bool _isCustomerServed;
     private CashPool _cashPool;
 
-    public static int CashBoxMoney { get; private set; } = 0;
+    public int CashBoxMoney { get; private set; } = 0;
 
     private void Start()
     {
         CashTransform = GetComponent<Transform>();
         _cashPool = GetComponent<CashPool>();
     }
-    private IEnumerator ServingClient()
-    {
-        yield return new WaitForSeconds(3);
-    }
+
     private void Update()
     {
         TakeMoney();
-        print(CashBoxMoney + " " + Money.PlayerMoney);       
+        print(CashBoxMoney + " " + Money.PlayerMoney);
+        print(CanBeServed);
     }
-    private bool OnTriggerEnter(Collider other) // если шо, коллайдер висит на родителе, а не на дочернем квадрате
-    {
-        if (other.TryGetComponent<PlayerMover>(out PlayerMover player))
-        {
-            print("работает");
-            StartCoroutine(ServingClient());
-            return _isCustomerServed = true;           
-        }      
-        else
-        {
-            return _isCustomerServed = false;
-        }
 
-    }
-    public void MoneySetter(int money, object objectChanger)
+    private void OnEnable() => _slotTriggerChecker.PlayerEnteredInTrigger += OnPlayerEnterInTrigger;
+
+    private void OnDisable() => _slotTriggerChecker.PlayerEnteredInTrigger -= OnPlayerEnterInTrigger;
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (objectChanger is Customer && money > 0)
+        if(!_cashierIsBought)
         {
-            CashBoxMoney += money;
-            _cashPool.RenderCash();
-        }
+            if (other.TryGetComponent(out PlayerMover player))
+                CanBeServed = true;
+        }    
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(!_cashierIsBought)
+        {
+            if (other.TryGetComponent(out PlayerMover player))
+                CanBeServed = false;
+        } 
     }
 
     private void TakeMoney()
@@ -62,5 +66,27 @@ public class CashBox : MonoBehaviour
             CashBoxMoney = 0;
             _cashPool.DisableCash();
         }       
-    } 
+    }
+
+    private void OnPlayerEnterInTrigger()
+    {
+        if(_cashierCost < Money.PlayerMoney)
+        {
+            Destroy(_slotTriggerChecker.gameObject);
+            Instantiate(_cashier, _positionForCashier.position, Quaternion.identity, transform);
+            _cashierIsBought = true;
+            CanBeServed = true;
+            TimeToServe /= 2;
+        } 
+    }
+
+    public void MoneySetter(int money, object objectChanger)
+    {
+        if (objectChanger is Customer && money > 0)
+        {
+            CashBoxMoney += money;
+            _cashPool.RenderCash();
+        }
+    }
+
 }
