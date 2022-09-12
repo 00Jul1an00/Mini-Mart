@@ -41,8 +41,9 @@ public class ContainerForProductionBuilding : ProductsObjectPool
         if (CanAddProduct)
         {
             yield return new WaitForSeconds(_animationDuration);
-            TryAddProduct();
-            player.PutProduct(_productType);
+            
+            if(player.TryPutProduct(_productType))
+                AddProduct();
         }
     }
 }

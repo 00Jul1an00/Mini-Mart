@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlayerInteracter : MonoBehaviour
 {
     [SerializeField] private float _animationDuration = 1f;
-    
+
     protected Action _action;
 
     private ProductsObjectPool _building;
@@ -18,13 +18,13 @@ public class PlayerInteracter : MonoBehaviour
         _building = GetComponent<ProductsObjectPool>();
 
         //For test
-        _action = _building.TryRemoveProduct;
+        _action = _building.RemoveProduct;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
-        if(other.TryGetComponent(out PlayerMover player) && _isNotYetCalled)
+
+        if (other.TryGetComponent(out PlayerMover player) && _isNotYetCalled)
         {
             print("enter");
             _isNotYetCalled = false;
@@ -34,7 +34,7 @@ public class PlayerInteracter : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        
+
         if (other.TryGetComponent(out PlayerMover player))
         {
             print("exit");
@@ -45,12 +45,11 @@ public class PlayerInteracter : MonoBehaviour
 
     protected IEnumerator WaitForAnimationEnd(PlayerMover player, bool condition)
     {
-        if(condition)
+        if (condition && player.CanTakeProduct)
         {
             yield return new WaitForSeconds(_animationDuration);
             _action();
             player.TakeProduct(_building.ProductType);
         }
-        
     }
 }

@@ -28,11 +28,10 @@ public class CashBox : MonoBehaviour
         _cashPool = GetComponent<CashPool>();
     }
 
+    //Change
     private void Update()
     {
         TakeMoney();
-        print(CashBoxMoney + " " + Money.PlayerMoney);
-        print(CanBeServed);
     }
 
     private void OnEnable() => _slotTriggerChecker.PlayerEnteredInTrigger += OnPlayerEnterInTrigger;

@@ -40,13 +40,13 @@ public abstract class ProductsObjectPool : MonoBehaviour
             Index++; 
     }
 
-    public void TryAddProduct()
+    public void AddProduct()
     {
         if (CanAddProduct)
             SetActiveStatusForProduct(true);
     }
 
-    public void TryRemoveProduct()
+    public void RemoveProduct()
     {
         if (CanRemoveProduct)
             SetActiveStatusForProduct(false);

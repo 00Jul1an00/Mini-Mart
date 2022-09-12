@@ -61,13 +61,13 @@ public class ProductionBuilding : ProductsObjectPool
             {
                 if (_containerForRequireProduct.ProductsInContainerQuantity > 0)
                 {
-                    _containerForRequireProduct.TryRemoveProduct();
-                    TryAddProduct();
+                    _containerForRequireProduct.RemoveProduct();
+                    AddProduct();
                 }
             }
             else
             {
-                TryAddProduct();
+                AddProduct();
             }            
         }
     }

@@ -59,7 +59,6 @@ public class GameManager : MonoBehaviour
         return requireProduct;
     }
 
-    //нужен для акцивации продукта после покупки соответсвующего здания
     public void ActivateProduct(Product product)
     {
         if (!_products.Contains(product))

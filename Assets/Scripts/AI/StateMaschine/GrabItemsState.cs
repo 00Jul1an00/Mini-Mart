@@ -22,7 +22,7 @@ public class GrabItemsState : BaseState
         {   
             if(_productContainer.CanRemoveProduct)
             {
-                _productContainer.TryRemoveProduct();
+                _productContainer.RemoveProduct();
                 customerStateMachine.Customer.GrabProduct();
                 _stateMachine.ActivateNextState();
             }
@@ -35,7 +35,7 @@ public class GrabItemsState : BaseState
             {
                 if (_productContainer.CanRemoveProduct && portersStateMachine.Porter.CanTakeProduct)
                 {
-                    _productContainer.TryRemoveProduct();
+                    _productContainer.RemoveProduct();
                     portersStateMachine.Porter.TryTakeProduct();
                     isGrabed = true;
                 }

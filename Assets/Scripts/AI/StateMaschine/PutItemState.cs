@@ -27,7 +27,7 @@ public class PutItemState : BaseState
             if (_productContainer.CanAddProduct && _porter.CanPutProduct)
             {
                 _porter.TryPutProduct();
-                _productContainer.TryAddProduct();
+                _productContainer.AddProduct();
                 canPut = true;
             }
         }
