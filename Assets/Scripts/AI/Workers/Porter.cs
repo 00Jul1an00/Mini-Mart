@@ -16,13 +16,13 @@ public class Porter : Worker
 
     private Stack<Product> _inventoryStack = new();
 
-    public void TryTakeProduct()
+    public void TakeProduct()
     {
         if (CanTakeProduct)
             _inventoryStack.Push(_productType);
     }
 
-    public void TryPutProduct()
+    public void PutProduct()
     {
         if (CanPutProduct)
             _inventoryStack.Pop();

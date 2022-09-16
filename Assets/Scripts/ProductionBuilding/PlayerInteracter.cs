@@ -3,51 +3,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-//сделать абстрактным и додумать логику наследования
-public class PlayerInteracter : MonoBehaviour
+public abstract class PlayerInteracter : MonoBehaviour
 {
-    [SerializeField] private float _animationDuration = 2f;
+    [SerializeField] protected float _animationDuration = 2f;
 
-    protected Action _action;
-
-    private ProductsObjectPool _building;
+    protected ProductsObjectPool _building;
+    protected PlayerMover _player;
     private Coroutine _coroutine;
 
     private void Start()
     {
         _building = GetComponent<ProductsObjectPool>();
-
-        //For test
-        _action = _building.RemoveProduct;
     }
 
     private void OnTriggerEnter(Collider other)
     {
-
+        print("enter");
         if (other.TryGetComponent(out PlayerMover player))
-        {       
-            _coroutine = StartCoroutine(WaitForAnimationEnd(player, _building.CanRemoveProduct));
+        {
+            if(_player == null)
+                _player = player;
+
+            _coroutine = StartCoroutine(WaitForAnimationEnd(SetActionsBehaivor()));
         }
     }
 
     private void OnTriggerExit(Collider other)
     {
         if (other.TryGetComponent(out PlayerMover player))
-        {
-            print("exit");
             StopCoroutine(_coroutine);
-        }
     }
 
-    protected IEnumerator WaitForAnimationEnd(PlayerMover player, bool condition)
+    protected abstract Tuple<Action, Action<Product>> SetActionsBehaivor();
+
+    protected abstract bool SetConditions();
+
+    private IEnumerator WaitForAnimationEnd(Tuple<Action, Action<Product>> actions)
     {
-        while (condition && player.CanTakeProduct)
+        while (SetConditions())
         {
             yield return new WaitForSeconds(_animationDuration);
-            print("enter");
-            _action();
-            player.TakeProduct(_building.ProductType);
-            
+            actions.Item1();
+            actions.Item2(_building.ProductType);
         }
     }
 }

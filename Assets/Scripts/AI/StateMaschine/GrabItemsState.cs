@@ -36,7 +36,7 @@ public class GrabItemsState : BaseState
                 if (_productContainer.CanRemoveProduct && portersStateMachine.Porter.CanTakeProduct)
                 {
                     _productContainer.RemoveProduct();
-                    portersStateMachine.Porter.TryTakeProduct();
+                    portersStateMachine.Porter.TakeProduct();
                     isGrabed = true;
                 }
                 else if(!portersStateMachine.Porter.CanTakeProduct)
