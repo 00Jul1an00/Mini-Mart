@@ -48,6 +48,8 @@ public class PlayerMover : MonoBehaviour
     private int _capacity = 2;
     
     public bool CanTakeProduct { get { return _inventory.Count < _capacity; } }
+    public bool CanPutProduct { get { return _inventory.Count > 0; } }
+    public Product NextProductInInventory { get { return _inventory.Peek(); } }
 
     public void TakeProduct(Product product)
     {
@@ -57,17 +59,11 @@ public class PlayerMover : MonoBehaviour
         print(_inventory.Count);
     }
 
-    public bool TryPutProduct(Product product)
+    public void PutProduct(Product product)
     {
-        if (_inventory.Count > 0 && _inventory.Peek() == product)
-        {
+        if ((CanPutProduct && NextProductInInventory == product))
             _inventory.Pop();
-            print(_inventory.Count);
-            return true;
-        }
-        else
-            return false;
+
+        print(_inventory.Count);
     }
-
-
 }

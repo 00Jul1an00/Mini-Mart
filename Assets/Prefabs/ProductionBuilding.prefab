@@ -994,6 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _delay: 5
   _productionBuilding: {fileID: 958431958043966562}
+  _cost: 0
 --- !u!1 &4819306258445592297
 GameObject:
   m_ObjectHideFlags: 0
@@ -1041,6 +1042,7 @@ GameObject:
   - component: {fileID: 5775266711199083822}
   - component: {fileID: 2615450119175675247}
   - component: {fileID: 5179963014909210753}
+  - component: {fileID: 213442541873081080}
   m_Layer: 0
   m_Name: Container
   m_TagString: Untagged
@@ -1163,6 +1165,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 7.450478, z: 1.67}
   m_Center: {x: 0.04, y: 3.6880362, z: -0.21}
+--- !u!114 &213442541873081080
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5054798827365255023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa5ca5d1700f5d149b656ae7c9984997, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationDuration: 2
 --- !u!1 &5130183514344400229
 GameObject:
   m_ObjectHideFlags: 0
@@ -1538,9 +1553,9 @@ GameObject:
   - component: {fileID: 2773683886646108479}
   - component: {fileID: 5857339230713944158}
   - component: {fileID: 958431958043966562}
-  - component: {fileID: 7416292872995514979}
   - component: {fileID: 3484107540277628159}
   - component: {fileID: 3809478719162910983}
+  - component: {fileID: 2664804058881446033}
   m_Layer: 0
   m_Name: ProductionBuildingLogic
   m_TagString: Untagged
@@ -1608,19 +1623,6 @@ MonoBehaviour:
   _slotCost: 0
   _costMultiplair: 0
   _containerForRequireProduct: {fileID: 5775266711199083822}
---- !u!114 &7416292872995514979
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7704607050312798109}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4541f3e3468b8dc409c9633b3d213c94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _animationDuration: 1
 --- !u!65 &3484107540277628159
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1650,6 +1652,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
+--- !u!114 &2664804058881446033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7704607050312798109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 18573d606e95ac74c9fd1a96a2fa5c12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animationDuration: 2
 --- !u!1 &7929459709668784899
 GameObject:
   m_ObjectHideFlags: 0
