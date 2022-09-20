@@ -8,7 +8,7 @@ public abstract class PlayerInteracter : MonoBehaviour
     [SerializeField] protected float _animationDuration = 2f;
 
     protected ProductsObjectPool _building;
-    protected PlayerMover _player;
+    protected PlayerInventory _player;
     private Coroutine _coroutine;
 
     private void Start()
@@ -18,8 +18,7 @@ public abstract class PlayerInteracter : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        print("enter");
-        if (other.TryGetComponent(out PlayerMover player))
+        if (other.TryGetComponent(out PlayerInventory player))
         {
             if(_player == null)
                 _player = player;
@@ -30,7 +29,7 @@ public abstract class PlayerInteracter : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.TryGetComponent(out PlayerMover player))
+        if (other.TryGetComponent(out PlayerInventory player))
             StopCoroutine(_coroutine);
     }
 

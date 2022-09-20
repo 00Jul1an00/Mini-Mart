@@ -42,28 +42,4 @@ public class PlayerMover : MonoBehaviour
             transform.rotation = Quaternion.LookRotation(direct);
         }
     }
-
-    //Move to another script
-    private Stack<Product> _inventory = new();
-    private int _capacity = 2;
-    
-    public bool CanTakeProduct { get { return _inventory.Count < _capacity; } }
-    public bool CanPutProduct { get { return _inventory.Count > 0; } }
-    public Product NextProductInInventory { get { return _inventory.Peek(); } }
-
-    public void TakeProduct(Product product)
-    {
-        if (CanTakeProduct)
-            _inventory.Push(product);
-
-        print(_inventory.Count);
-    }
-
-    public void PutProduct(Product product)
-    {
-        if ((CanPutProduct && NextProductInInventory == product))
-            _inventory.Pop();
-
-        print(_inventory.Count);
-    }
 }

@@ -168,6 +168,7 @@ MonoBehaviour:
   _inventoryCapacity: 3
   _isProductionToShelf: 1
   _holdZone: {fileID: 6947314032021886837}
+  _speedIncreaseOn: 3
 --- !u!1 &6947314032021886837
 GameObject:
   m_ObjectHideFlags: 0

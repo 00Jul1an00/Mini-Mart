@@ -6,11 +6,13 @@ using UnityEngine.AI;
 [RequireComponent(typeof(NavMeshAgent))]
 public class AIUnit : MonoBehaviour
 {
+    [SerializeField] private NavMeshAgent _agent;
+
     public float Speed { get { return _agent.speed; } set { _agent.speed = value; } }
     public bool isStopped { get { return _agent.isStopped; } set { _agent.isStopped = value; } }
     public float remainingDistance { get { return _agent.remainingDistance; } }
 
-    [SerializeField] private NavMeshAgent _agent;
+
 
     private void Start()
     {

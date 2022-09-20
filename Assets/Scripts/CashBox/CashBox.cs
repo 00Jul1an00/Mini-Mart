@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +13,10 @@ public class CashBox : MonoBehaviour
     [SerializeField] private Transform _positionForCashier;
     [SerializeField] private List<Transform> _queuePositions;
 
+    public event Action CustomerWasServed;
+
     public IReadOnlyList<Transform> QueuePositions { get; private set; }
+    public int PosInQueue { get; set; }
 
     public Transform CashTransform;
 
@@ -91,14 +95,8 @@ public class CashBox : MonoBehaviour
         {
             CashBoxMoney += money;
             _cashPool.RenderCash();
+            CustomerWasServed?.Invoke();
+            PosInQueue--;
         }
-    }
-}
-
-public static class QueuePosition
-{
-    public static bool IsFree(this Transform pos, AIUnit agent)
-    {
-        return (Vector3.Distance(pos.position, agent.transform.position) > .1f);
     }
 }
