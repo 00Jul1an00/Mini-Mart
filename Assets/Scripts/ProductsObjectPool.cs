@@ -15,6 +15,7 @@ public abstract class ProductsObjectPool : MonoBehaviour
     protected List<Product> _productsInObjectPool = new();
     protected int Index { get; private set; }
 
+    public Product _currentProduct { get { return _productsInObjectPool[Index]; } private set { } }
     public Product ProductType => _productType;
 
     protected void Init()
@@ -36,6 +37,7 @@ public abstract class ProductsObjectPool : MonoBehaviour
 
         _productsInObjectPool[Index].gameObject.SetActive(status);
         
+        
         if (status)
             Index++; 
     }
@@ -51,4 +53,6 @@ public abstract class ProductsObjectPool : MonoBehaviour
         if (CanRemoveProduct)
             SetActiveStatusForProduct(false);
     }
+
+    
 }
