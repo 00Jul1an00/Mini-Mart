@@ -10,6 +10,9 @@ public class CashBox : MonoBehaviour
     [SerializeField] private Cashier _cashier;
     [SerializeField] private float _cashierCost;
     [SerializeField] private Transform _positionForCashier;
+    [SerializeField] private List<Transform> _queuePositions;
+
+    public IReadOnlyList<Transform> QueuePositions { get; private set; }
 
     public Transform CashTransform;
 
@@ -28,6 +31,7 @@ public class CashBox : MonoBehaviour
         CashTransform = GetComponent<Transform>();
         _cashPool = GetComponent<CashPool>();
         _money = GetComponent<Money>();
+        QueuePositions = _queuePositions;
     }
 
     //Change
@@ -89,5 +93,12 @@ public class CashBox : MonoBehaviour
             _cashPool.RenderCash();
         }
     }
+}
 
+public static class QueuePosition
+{
+    public static bool IsFree(this Transform pos, AIUnit agent)
+    {
+        return (Vector3.Distance(pos.position, agent.transform.position) > .1f);
+    }
 }

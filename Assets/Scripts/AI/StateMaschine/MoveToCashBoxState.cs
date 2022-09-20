@@ -8,6 +8,8 @@ public class MoveToCashBoxState : MoveToTargetBaseState
     private CashBox _cashBox;
     private Customer _customer;
     private bool _isNotYetCalled = true;
+    private bool _canBeServed;
+    private int _queuePosition;
 
     public MoveToCashBoxState(Transform target, AIUnit agent, CustomerStateMachine stateMachine, CashBox cashBox) : base(target, agent, stateMachine) 
     {
@@ -17,7 +19,16 @@ public class MoveToCashBoxState : MoveToTargetBaseState
 
     public override void EnterState()
     {
-        AIManager.Instance.MakeAgentsCircleTarget(_target.transform, _agent);
+        for (int i = 0; i < _cashBox.QueuePositions.Count; i++)
+        {
+            if (_cashBox.QueuePositions[i].IsFree(_agent))
+            {
+                _agent.MoveTo(_cashBox.QueuePositions[i].position);
+                return;
+            }
+        }
+        //danger
+        EnterState();
     }
 
     public override void UpdateState()
