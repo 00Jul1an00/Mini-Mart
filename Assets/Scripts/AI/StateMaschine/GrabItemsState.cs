@@ -6,12 +6,13 @@ using UnityEngine.AI;
 public class GrabItemsState : BaseState
 {
     private readonly ProductsObjectPool _productContainer;
+    
 
     public GrabItemsState(AIUnit agent, ProductsObjectPool productContainer, StateMachine stateMachine) : base(stateMachine, agent)
     {
         _productContainer = productContainer;
     }
-
+  
     public override void EnterState()
     {
     }
@@ -37,6 +38,7 @@ public class GrabItemsState : BaseState
                 {
                     _productContainer.RemoveProduct();
                     portersStateMachine.Porter.TakeProduct();
+                    ProductInteraction.TakeProduct(_productContainer._currentProduct, portersStateMachine.Porter._holdZone);
                     isGrabed = true;
                 }
                 else if(!portersStateMachine.Porter.CanTakeProduct)
