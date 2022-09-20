@@ -7,6 +7,7 @@ public class Porter : Worker
     [SerializeField] private Product _productType;
     [SerializeField] private int _inventoryCapacity;
     [SerializeField] private bool _isProductionToShelf;
+    [SerializeField] private GameObject _holdZone;
 
     public bool CanTakeProduct { get { return _inventoryStack.Count < _inventoryCapacity; } private set { } }
     public bool CanPutProduct { get { return _inventoryStack.Count > 0; } private set { } }
@@ -19,7 +20,10 @@ public class Porter : Worker
     public void TakeProduct()
     {
         if (CanTakeProduct)
+        {
             _inventoryStack.Push(_productType);
+            //ProductInteraction.TakeProduct(_productType, _holdZone);
+        }
     }
 
     public void PutProduct()
